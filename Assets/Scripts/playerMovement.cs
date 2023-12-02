@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class playerMovement : MonoBehaviour
 {
@@ -8,15 +9,19 @@ public class playerMovement : MonoBehaviour
     [SerializeField] float moveSpeed;
     public float sprintSpeed;
     public float walkSpeed;
+    public float crouchSpeed;
 
     public float jumpForce;
+    public float downForce;
 
     public enum MoveState
     {
         Walk,
         Run,
+        crouch,
     }
     public MoveState moveState;
+    private MoveState oldState;
 
     private bool grounded;
 
@@ -29,14 +34,10 @@ public class playerMovement : MonoBehaviour
     public Rigidbody rb;
     public Transform playerCamera;
 
-
-    // Start is called before the first frame update
     void Start()
     {
 
     }
-
-    // Update is called once per frame
     void Update()
     {
         playerRoation();
@@ -47,6 +48,7 @@ public class playerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+        AddDownForce();
     }
 
     private void playerRoation()
@@ -59,28 +61,38 @@ public class playerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-
-        moveForce = ((transform.forward * verticalInput) + (transform.right * horizontalInput));
-
+        
+        moveForce = ((transform.forward * verticalInput) + (transform.right * horizontalInput));            
+        
         rb.AddForce(moveForce.normalized * moveSpeed * 10, ForceMode.Force);
     }
     private void jump()
     {
-        if (Input.GetButtonDown("Jump") && grounded)
-        {
-            print("Jump");
+        if (Input.GetButtonDown("Jump") && grounded){
             rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
             grounded = false;
+        }
+    }
+    private void AddDownForce()
+    {
+        if (!grounded)
+        {
+            rb.AddForce(0, -downForce, 0, ForceMode.Force);
         }
     }
 
     private void groundCheck(){
         grounded = Physics.Raycast(transform.position, -Vector3.up, playerHeight);
-        Debug.DrawRay(transform.position, -Vector3.up, Color.red, playerHeight);
     }
     private void moveStateHandler()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        
+        if (Input.GetKey(KeyCode.LeftControl) && grounded)
+        {
+            moveState = MoveState.crouch;
+            moveSpeed = crouchSpeed;
+        }
+        else if (Input.GetKey(KeyCode.LeftShift) && (Input.GetAxisRaw("Vertical") >= 0))
         {
             moveState = MoveState.Run;
             moveSpeed = sprintSpeed;
@@ -89,6 +101,29 @@ public class playerMovement : MonoBehaviour
         {
             moveState = MoveState.Walk;
             moveSpeed = walkSpeed;
+        }
+        
+        // checks if state has been changed
+        if (moveState != oldState)
+        {
+            OnStateChange(moveState, oldState);
+            oldState = moveState;
+        }
+    }
+    private void OnStateChange(MoveState newState, MoveState lastState)
+    {
+        switch (lastState)
+        {
+            case MoveState.crouch:
+                rb.transform.localScale = new Vector3 (1,1,1);
+                break;
+        }
+        switch(newState)
+        {
+            case MoveState.crouch:
+                rb.transform.localScale = new Vector3(1, (float)0.5, 1);
+                rb.AddForce(0,-14,0, ForceMode.Impulse);
+                break;
         }
     }
 }
