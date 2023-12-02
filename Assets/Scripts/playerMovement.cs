@@ -6,15 +6,25 @@ public class playerMovement : MonoBehaviour
 {
 
     [SerializeField] float moveSpeed;
+    public float sprintSpeed;
+    public float walkSpeed;
 
+    public float jumpForce;
 
-    [SerializeField] bool grounded;
+    public enum MoveState
+    {
+        Walk,
+        Run,
+    }
+    public MoveState moveState;
+
+    private bool grounded;
 
     private float horizontalInput;
     private float verticalInput;
 
     public float playerHeight;
-    Vector3 moveForce;
+    private Vector3 moveForce;
 
     public Rigidbody rb;
     public Transform playerCamera;
@@ -32,6 +42,7 @@ public class playerMovement : MonoBehaviour
         playerRoation();
         groundCheck();
         jump();
+        moveStateHandler();
     }
     private void FixedUpdate()
     {
@@ -58,12 +69,26 @@ public class playerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && grounded)
         {
             print("Jump");
-            rb.AddForce(0, 10, 0, ForceMode.Impulse);
+            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+            grounded = false;
         }
     }
 
     private void groundCheck(){
         grounded = Physics.Raycast(transform.position, -Vector3.up, playerHeight);
         Debug.DrawRay(transform.position, -Vector3.up, Color.red, playerHeight);
+    }
+    private void moveStateHandler()
+    {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveState = MoveState.Run;
+            moveSpeed = sprintSpeed;
+        }
+        else
+        {
+            moveState = MoveState.Walk;
+            moveSpeed = walkSpeed;
+        }
     }
 }
