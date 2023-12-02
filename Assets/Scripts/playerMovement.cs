@@ -90,17 +90,14 @@ public class playerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl) && grounded)
         {
             moveState = MoveState.crouch;
-            moveSpeed = crouchSpeed;
         }
         else if (Input.GetKey(KeyCode.LeftShift) && (Input.GetAxisRaw("Vertical") >= 0))
         {
             moveState = MoveState.Run;
-            moveSpeed = sprintSpeed;
         }
         else
         {
             moveState = MoveState.Walk;
-            moveSpeed = walkSpeed;
         }
         
         // checks if state has been changed
@@ -123,6 +120,14 @@ public class playerMovement : MonoBehaviour
             case MoveState.crouch:
                 rb.transform.localScale = new Vector3(1, (float)0.5, 1);
                 rb.AddForce(0,-14,0, ForceMode.Impulse);
+
+                moveSpeed = crouchSpeed;
+                break;
+            case MoveState.Walk:
+                moveSpeed = walkSpeed;
+                break;
+            case MoveState.Run:
+                moveSpeed = sprintSpeed;
                 break;
         }
     }
