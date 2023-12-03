@@ -65,7 +65,6 @@ public class playerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
-        AddDownForce();
     }
 
     private void Move()
@@ -90,13 +89,6 @@ public class playerMovement : MonoBehaviour
                 rb.AddForce(0, jumpForce*(float)1.5, 0, ForceMode.Impulse);
                 grounded = false;
             }
-        }
-    }
-    private void AddDownForce()
-    {
-        if (!grounded && !wallRunning)
-        {
-            rb.AddForce(0, -downForce, 0, ForceMode.Force);
         }
     }
 
