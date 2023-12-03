@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +7,13 @@ using UnityEngine.UI;
 public class playerMovement : MonoBehaviour
 {
 
-    [SerializeField] float moveSpeed;
+    [SerializeField] float playerSpeed;
+
+    private float moveSpeed;
     public float sprintSpeed;
     public float walkSpeed;
     public float crouchSpeed;
+    public float wallRunningSpeed;
 
     public float jumpForce;
     public float downForce;
@@ -19,11 +23,15 @@ public class playerMovement : MonoBehaviour
         Walk,
         Run,
         crouch,
+        wallRunning,
     }
     public MoveState moveState;
     private MoveState oldState;
 
     private bool grounded;
+
+    private bool wallRunning = false;
+    public float wallRunSpeedNeeded;
 
     private float horizontalInput;
     private float verticalInput;
@@ -31,6 +39,7 @@ public class playerMovement : MonoBehaviour
     public float playerHeight;
     private Vector3 moveForce;
 
+    private GameObject runningOnWall;
     public Rigidbody rb;
     public Transform playerCamera;
 
@@ -40,7 +49,15 @@ public class playerMovement : MonoBehaviour
     }
     void Update()
     {
-        playerRoation();
+        playerSpeed = Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.z);
+
+        if (wallRunning && playerSpeed < wallRunSpeedNeeded) {
+            exitWallRun();
+        }
+
+        Quaternion playerRotation = Quaternion.Euler(0, playerCamera.transform.localRotation.eulerAngles.y, 0);
+        transform.rotation = playerRotation;
+
         groundCheck();
         jump();
         moveStateHandler();
@@ -49,12 +66,6 @@ public class playerMovement : MonoBehaviour
     {
         Move();
         AddDownForce();
-    }
-
-    private void playerRoation()
-    {
-        Quaternion playerRotation = Quaternion.Euler(0, playerCamera.transform.localRotation.eulerAngles.y, 0);
-        transform.rotation = playerRotation;
     }
 
     private void Move()
@@ -68,14 +79,22 @@ public class playerMovement : MonoBehaviour
     }
     private void jump()
     {
-        if (Input.GetButtonDown("Jump") && grounded){
-            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
-            grounded = false;
+        if (Input.GetButtonDown("Jump") && (grounded || wallRunning)){
+            if (grounded)
+            {
+                rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+                grounded = false;
+            } 
+            else if (wallRunning)
+            {
+                rb.AddForce(0, jumpForce*(float)1.5, 0, ForceMode.Impulse);
+                grounded = false;
+            }
         }
     }
     private void AddDownForce()
     {
-        if (!grounded)
+        if (!grounded && !wallRunning)
         {
             rb.AddForce(0, -downForce, 0, ForceMode.Force);
         }
@@ -86,8 +105,11 @@ public class playerMovement : MonoBehaviour
     }
     private void moveStateHandler()
     {
-        
-        if (Input.GetKey(KeyCode.LeftControl) && grounded)
+        if (wallRunning == true)
+        {
+            moveState = MoveState.wallRunning;
+        }
+        else if (Input.GetKey(KeyCode.LeftControl) && grounded)
         {
             moveState = MoveState.crouch;
         }
@@ -129,6 +151,38 @@ public class playerMovement : MonoBehaviour
             case MoveState.Run:
                 moveSpeed = sprintSpeed;
                 break;
+            case MoveState.wallRunning: 
+                moveSpeed = wallRunningSpeed;
+                break;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 8 && !grounded && playerSpeed > wallRunSpeedNeeded && moveState != MoveState.Walk)
+        {
+            runningOnWall = collision.gameObject;
+            startWallRun();
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject == runningOnWall)
+        {
+            exitWallRun();
+        }
+
+    }
+
+    private void startWallRun()
+    {
+        wallRunning = true;
+        rb.useGravity = false;
+    }
+    private void exitWallRun()
+    {
+        runningOnWall = null;
+        wallRunning = false;
+        rb.useGravity = true;
     }
 }
