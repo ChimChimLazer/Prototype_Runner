@@ -31,7 +31,9 @@ public class playerMovement : MonoBehaviour
     private bool grounded;
 
     private bool wallRunning = false;
+    private float wallRunCoolDown;
     public float wallRunSpeedNeeded;
+    public float wallRunCoolDownTime;
 
     private float horizontalInput;
     private float verticalInput;
@@ -45,7 +47,7 @@ public class playerMovement : MonoBehaviour
 
     void Start()
     {
-
+        wallRunCoolDown = wallRunCoolDownTime;
     }
     void Update()
     {
@@ -53,6 +55,10 @@ public class playerMovement : MonoBehaviour
 
         if (wallRunning && playerSpeed < wallRunSpeedNeeded) {
             exitWallRun();
+        }
+        if (wallRunCoolDown < wallRunCoolDownTime)
+        {
+            wallRunCoolDown += Time.deltaTime;
         }
 
         Quaternion playerRotation = Quaternion.Euler(0, playerCamera.transform.localRotation.eulerAngles.y, 0);
@@ -87,6 +93,7 @@ public class playerMovement : MonoBehaviour
             else if (wallRunning)
             {
                 rb.AddForce(0, jumpForce*(float)1.5, 0, ForceMode.Impulse);
+                exitWallRun();
                 grounded = false;
             }
         }
@@ -151,7 +158,7 @@ public class playerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == 8 && !grounded && playerSpeed > wallRunSpeedNeeded && moveState != MoveState.Walk)
+        if (collision.gameObject.layer == 8 && !grounded && playerSpeed > wallRunSpeedNeeded && moveState != MoveState.Walk && wallRunCoolDown >= wallRunCoolDownTime)
         {
             runningOnWall = collision.gameObject;
             startWallRun();
@@ -176,5 +183,7 @@ public class playerMovement : MonoBehaviour
         runningOnWall = null;
         wallRunning = false;
         rb.useGravity = true;
+
+        wallRunCoolDown = 0;
     }
 }
