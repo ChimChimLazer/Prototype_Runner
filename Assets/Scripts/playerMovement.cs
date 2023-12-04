@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class playerMovement : MonoBehaviour
 {
 
-    [SerializeField] float playerSpeed;
+    private float playerSpeed;
 
     private float moveSpeed;
     public float sprintSpeed;
@@ -30,6 +30,7 @@ public class playerMovement : MonoBehaviour
 
     private bool grounded;
 
+    private bool walkRunReady;
     private bool wallRunning = false;
     private float wallRunCoolDown;
     public float wallRunSpeedNeeded;
@@ -59,6 +60,9 @@ public class playerMovement : MonoBehaviour
         if (wallRunCoolDown < wallRunCoolDownTime)
         {
             wallRunCoolDown += Time.deltaTime;
+        } else
+        {
+            walkRunReady = !grounded && playerSpeed > wallRunSpeedNeeded && moveState != MoveState.Walk;
         }
 
         Quaternion playerRotation = Quaternion.Euler(0, playerCamera.transform.localRotation.eulerAngles.y, 0);
@@ -68,12 +72,12 @@ public class playerMovement : MonoBehaviour
         jump();
         moveStateHandler();
     }
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         Move();
     }
 
-    private void Move()
+    void Move()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
@@ -82,7 +86,7 @@ public class playerMovement : MonoBehaviour
         
         rb.AddForce(moveForce.normalized * moveSpeed * 10, ForceMode.Force);
     }
-    private void jump()
+    void jump()
     {
         if (Input.GetButtonDown("Jump") && (grounded || wallRunning)){
             if (grounded)
@@ -99,10 +103,10 @@ public class playerMovement : MonoBehaviour
         }
     }
 
-    private void groundCheck(){
+    void groundCheck(){
         grounded = Physics.Raycast(transform.position, -Vector3.up, playerHeight);
     }
-    private void moveStateHandler()
+    void moveStateHandler()
     {
         if (wallRunning == true)
         {
@@ -128,7 +132,7 @@ public class playerMovement : MonoBehaviour
             oldState = moveState;
         }
     }
-    private void OnStateChange(MoveState newState, MoveState lastState)
+    void OnStateChange(MoveState newState, MoveState lastState)
     {
         switch (lastState)
         {
@@ -156,15 +160,15 @@ public class playerMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == 8 && !grounded && playerSpeed > wallRunSpeedNeeded && moveState != MoveState.Walk && wallRunCoolDown >= wallRunCoolDownTime)
+        if (collision.gameObject.layer == 8 && walkRunReady)
         {
             runningOnWall = collision.gameObject;
             startWallRun();
         }
     }
-    private void OnCollisionExit(Collision collision)
+    void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject == runningOnWall)
         {
@@ -173,12 +177,12 @@ public class playerMovement : MonoBehaviour
 
     }
 
-    private void startWallRun()
+    void startWallRun()
     {
         wallRunning = true;
         rb.useGravity = false;
     }
-    private void exitWallRun()
+    void exitWallRun()
     {
         runningOnWall = null;
         wallRunning = false;
