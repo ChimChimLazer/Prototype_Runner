@@ -40,11 +40,14 @@ public class playerMovement : MonoBehaviour
     private float verticalInput;
 
     public float playerHeight;
+    public float playerWidth;
     private Vector3 moveForce;
 
     private GameObject runningOnWall;
     public Rigidbody rb;
     public Transform playerCamera;
+
+    private Vector3 playerDirectionRight;
 
     void Start()
     {
@@ -67,7 +70,7 @@ public class playerMovement : MonoBehaviour
 
         Quaternion playerRotation = Quaternion.Euler(0, playerCamera.transform.localRotation.eulerAngles.y, 0);
         transform.rotation = playerRotation;
-
+        
         groundCheck();
         jump();
         moveStateHandler();
@@ -164,6 +167,17 @@ public class playerMovement : MonoBehaviour
     {
         if (collision.gameObject.layer == 8 && walkRunReady)
         {
+            playerDirectionRight = transform.right;
+
+            if (Physics.Raycast(transform.position, playerDirectionRight, playerWidth))
+            {
+                Debug.Log("Wall Run Right");
+            }
+            if (Physics.Raycast(transform.position, -playerDirectionRight, playerWidth))
+            {
+                Debug.Log("Wall Run Left");
+            }
+
             runningOnWall = collision.gameObject;
             startWallRun();
         }
@@ -174,7 +188,6 @@ public class playerMovement : MonoBehaviour
         {
             exitWallRun();
         }
-
     }
 
     void startWallRun()
