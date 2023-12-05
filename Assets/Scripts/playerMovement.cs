@@ -6,17 +6,19 @@ using UnityEngine.UI;
 
 public class playerMovement : MonoBehaviour
 {
-
     private float playerSpeed;
-
-    private float moveSpeed;
+    
+    [Header("Movement Speed")]
     public float sprintSpeed;
     public float walkSpeed;
     public float crouchSpeed;
     public float wallRunningSpeed;
 
+    private float moveSpeed;
+
+    [Header("Jump Height")]
+
     public float jumpForce;
-    public float downForce;
 
     public enum MoveState
     {
@@ -30,25 +32,28 @@ public class playerMovement : MonoBehaviour
 
     private bool grounded;
 
-    private bool walkRunReady;
-    private bool wallRunning = false;
-    private float wallRunCoolDown;
-
+    [Header("Wall Running")]
     public float wallRunSpeedNeeded;
     public float wallRunCoolDownTime;
     public float wallRunMomentum;
     public float wallRunGrabForce;
 
+    private bool walkRunReady;
+    private bool wallRunning = false;
+    private float wallRunCoolDown;
+
     private float horizontalInput;
     private float verticalInput;
 
+    [Header("Player Stats")]
     public float playerHeight;
     public float playerWidth;
     private Vector3 moveForce;
 
-    private GameObject runningOnWall;
+    [Header("References")]
     public Rigidbody rb;
     public Transform playerCamera;
+    private GameObject runningOnWall;
 
     void Start()
     {
