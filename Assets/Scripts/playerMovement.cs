@@ -67,8 +67,11 @@ public class playerMovement : MonoBehaviour
             walkRunReady = !grounded && playerSpeed > wallRunSpeedNeeded && moveState != MoveState.Walk;
         }
 
-        Quaternion playerRotation = Quaternion.Euler(0, playerCamera.transform.localRotation.eulerAngles.y, 0);
-        transform.rotation = playerRotation;
+        if (!wallRunning)
+        {
+            Quaternion playerRotation = Quaternion.Euler(0, playerCamera.transform.localRotation.eulerAngles.y, 0);
+            transform.rotation = playerRotation;
+        }
 
         groundCheck();
         jump();
@@ -167,6 +170,7 @@ public class playerMovement : MonoBehaviour
         if (collision.gameObject.layer == 8 && walkRunReady)
         {
             Vector3 playerDirectionRight = transform.right;
+
             if (Physics.Raycast(transform.position, playerDirectionRight, playerWidth)){
                 Debug.Log("Wallrun right");
             } 
