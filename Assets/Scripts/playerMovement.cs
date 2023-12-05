@@ -48,6 +48,7 @@ public class playerMovement : MonoBehaviour
 
     void Start()
     {
+        moveSpeed = walkSpeed;
         wallRunCoolDown = wallRunCoolDownTime;
     }
     void Update()
