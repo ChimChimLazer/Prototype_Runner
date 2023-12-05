@@ -40,6 +40,7 @@ public class playerMovement : MonoBehaviour
     private float verticalInput;
 
     public float playerHeight;
+    public float playerWidth;
     private Vector3 moveForce;
 
     private GameObject runningOnWall;
@@ -165,6 +166,14 @@ public class playerMovement : MonoBehaviour
     {
         if (collision.gameObject.layer == 8 && walkRunReady)
         {
+            Vector3 playerDirectionRight = transform.right;
+            if (Physics.Raycast(transform.position, playerDirectionRight, playerWidth)){
+                Debug.Log("Wallrun right");
+            } 
+            else if (Physics.Raycast(transform.position, -playerDirectionRight, playerWidth)){
+                Debug.Log("Wallrun left");
+            }
+
             runningOnWall = collision.gameObject;
             startWallRun();
         }
@@ -175,7 +184,6 @@ public class playerMovement : MonoBehaviour
         {
             exitWallRun();
         }
-
     }
 
     void startWallRun()
