@@ -33,8 +33,11 @@ public class playerMovement : MonoBehaviour
     private bool walkRunReady;
     private bool wallRunning = false;
     private float wallRunCoolDown;
+
     public float wallRunSpeedNeeded;
     public float wallRunCoolDownTime;
+    public float wallRunMomentum;
+    public float wallRunGrabForce;
 
     private float horizontalInput;
     private float verticalInput;
@@ -102,6 +105,7 @@ public class playerMovement : MonoBehaviour
             else if (wallRunning)
             {
                 rb.AddForce(0, jumpForce*(float)1.5, 0, ForceMode.Impulse);
+                rb.AddForce(transform.forward* wallRunMomentum, ForceMode.Impulse);
                 exitWallRun();
                 grounded = false;
             }
@@ -194,6 +198,8 @@ public class playerMovement : MonoBehaviour
     {
         wallRunning = true;
         rb.useGravity = false;
+
+        rb.AddForce(transform.up * wallRunGrabForce, ForceMode.Impulse);
     }
     void exitWallRun()
     {
