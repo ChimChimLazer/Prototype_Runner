@@ -38,6 +38,9 @@ public class playerMovement : MonoBehaviour
     public float wallRunMomentum;
     public float wallRunGrabForce;
 
+    public static float wallRunCameraRotation;
+    public float wallRunRotationAmount;
+
     private bool walkRunReady;
     private bool wallRunning = false;
     private float wallRunCoolDown;
@@ -181,10 +184,10 @@ public class playerMovement : MonoBehaviour
             Vector3 playerDirectionRight = transform.right;
 
             if (Physics.Raycast(transform.position, playerDirectionRight, playerWidth)){
-                Debug.Log("Wallrun right");
+                wallRunCameraRotation = wallRunRotationAmount;
             } 
             else if (Physics.Raycast(transform.position, -playerDirectionRight, playerWidth)){
-                Debug.Log("Wallrun left");
+                wallRunCameraRotation = -wallRunRotationAmount;
             }
 
             runningOnWall = collision.gameObject;
@@ -211,6 +214,8 @@ public class playerMovement : MonoBehaviour
         runningOnWall = null;
         wallRunning = false;
         rb.useGravity = true;
+
+        wallRunCameraRotation = 0;
 
         wallRunCoolDown = 0;
     }
