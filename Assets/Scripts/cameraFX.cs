@@ -4,11 +4,36 @@ using UnityEngine;
 
 public class cameraFX : MonoBehaviour
 {
+    public int WallRunFOVChange;
 
-    // Update is called once per frame
+    private float wallRunRotation;
+    public Camera playerCamera;
+
     void Update()
     {
-        Quaternion cameraTilt = Quaternion.Euler(transform.rotation.x, transform.rotation.y, playerMovement.wallRunCameraRotation);
+        if (wallRunRotation != playerMovement.wallRunCameraRotation)
+        {
+            wallRunRotation = playerMovement.wallRunCameraRotation;
+            setTiltZ(wallRunRotation);
+            if (wallRunRotation != 0)
+            {
+                changeFOV(WallRunFOVChange);
+            } else
+            {
+                changeFOV(-WallRunFOVChange);
+            }
+            
+        }
+    }
+
+    void setTiltZ(float newTilt)
+    {
+        Quaternion cameraTilt = Quaternion.Euler(transform.rotation.x, transform.rotation.y, newTilt);
         transform.localRotation = cameraTilt;
+    }
+
+    void changeFOV(int FOVChange)
+    {
+        playerCamera.fieldOfView += FOVChange;
     }
 }
