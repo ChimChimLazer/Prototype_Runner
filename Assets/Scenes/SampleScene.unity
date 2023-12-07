@@ -1395,7 +1395,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprintSpeed: 12
   walkSpeed: 7
-  crouchSpeed: 1
+  crouchSpeed: 2
   wallRunningSpeed: 10
   jumpForce: 40
   moveState: 0
