@@ -1401,11 +1401,15 @@ MonoBehaviour:
   airDrag: 1.5
   jumpForce: 40
   moveState: 0
+  slideThreshold: 8
+  slideCooldownTime: 0.5
+  slideDrag: 2.5
+  slideForce: 45
   wallRunSpeedNeeded: 5
   wallRunCoolDownTime: 0.1
   wallRunMomentum: 30
-  wallRunGrabForce: 20
-  wallRunRotationAmount: 8
+  wallRunGrabForce: 18
+  wallRunRotationAmount: 9
   playerHeight: 1.1
   playerWidth: 0.9
   rb: {fileID: 1406991299}

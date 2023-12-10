@@ -143,8 +143,13 @@ public class playerMovement : MonoBehaviour
                 }
             }
 
-            rb.drag = groundedDrag;
-
+            if (moveState == MoveState.Slide)
+            {
+                rb.drag = slideDrag;
+            } else
+            {
+                rb.drag = groundedDrag;
+            }
         } else
         {
             rb.drag = airDrag;
