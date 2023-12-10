@@ -16,6 +16,11 @@ public class playerMovement : MonoBehaviour
 
     private float moveSpeed;
 
+    [Header("Drag")]
+    public float groundedDrag;
+    public float airDrag;
+
+
     [Header("Jump Height")]
 
     public float jumpForce;
@@ -27,7 +32,6 @@ public class playerMovement : MonoBehaviour
         crouch,
         wallRunning,
         Idle,
-        Falling,
     }
     public MoveState moveState;
     private MoveState oldState;
@@ -106,19 +110,29 @@ public class playerMovement : MonoBehaviour
     }
     void jump()
     {
-        if (Input.GetButtonDown("Jump") && (grounded || wallRunning)){
-            if (grounded)
+        if (grounded || wallRunning)
+        {
+            if (Input.GetButtonDown("Jump"))
             {
-                rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
-                grounded = false;
-            } 
-            else if (wallRunning)
-            {
-                rb.AddForce(0, jumpForce*(float)1.5, 0, ForceMode.Impulse);
-                rb.AddForce(transform.forward* wallRunMomentum, ForceMode.Impulse);
-                exitWallRun();
-                grounded = false;
+                if (grounded)
+                {
+                    rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+                    grounded = false;
+                }
+                else if (wallRunning)
+                {
+                    rb.AddForce(0, jumpForce * (float)1.5, 0, ForceMode.Impulse);
+                    rb.AddForce(transform.forward * wallRunMomentum, ForceMode.Impulse);
+                    exitWallRun();
+                    grounded = false;
+                }
             }
+
+            rb.drag = groundedDrag;
+
+        } else
+        {
+            rb.drag = airDrag;
         }
     }
 

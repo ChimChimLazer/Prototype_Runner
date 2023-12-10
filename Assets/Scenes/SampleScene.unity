@@ -1402,7 +1402,7 @@ MonoBehaviour:
   wallRunSpeedNeeded: 5
   wallRunCoolDownTime: 0.1
   wallRunMomentum: 50
-  wallRunGrabForce: 15
+  wallRunGrabForce: 20
   wallRunRotationAmount: 8
   playerHeight: 1.1
   playerWidth: 0.9
