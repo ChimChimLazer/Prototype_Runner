@@ -44,6 +44,7 @@ public class playerMovement : MonoBehaviour
     public float slideCooldownTime;
     private float slideCooldown;
     public float slideDrag;
+    public float slideForce;
 
     [Header("Wall Running")]
     public float wallRunSpeedNeeded;
@@ -65,6 +66,7 @@ public class playerMovement : MonoBehaviour
     public float playerHeight;
     public float playerWidth;
     private Vector3 moveForce;
+    private Vector3 slideForceApplied;
 
     [Header("References")]
     public Rigidbody rb;
@@ -100,7 +102,6 @@ public class playerMovement : MonoBehaviour
 
         if (moveState != MoveState.Slide && slideCooldown < slideCooldownTime)
         {
-            Debug.Log("SlideCooling");
             slideCooldown += Time.deltaTime;
         }
 
@@ -227,6 +228,9 @@ public class playerMovement : MonoBehaviour
                     rb.transform.localScale = new Vector3(1, (float)0.5, 1);
                     rb.AddForce(0, -14, 0, ForceMode.Impulse);
                 }
+
+                slideForceApplied = (transform.forward);
+                rb.AddForce(slideForceApplied.normalized * slideForce, ForceMode.Impulse);
 
                 moveSpeed = crouchSpeed;
                 break;
