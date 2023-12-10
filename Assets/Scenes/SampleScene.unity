@@ -783,7 +783,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.75
+  m_Intensity: 0.7
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -842,7 +842,7 @@ Transform:
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 2.25, y: 7.28, z: -18.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1397,11 +1397,13 @@ MonoBehaviour:
   walkSpeed: 7
   crouchSpeed: 2
   wallRunningSpeed: 10
+  groundedDrag: 2
+  airDrag: 1.5
   jumpForce: 40
   moveState: 0
   wallRunSpeedNeeded: 5
   wallRunCoolDownTime: 0.1
-  wallRunMomentum: 50
+  wallRunMomentum: 30
   wallRunGrabForce: 20
   wallRunRotationAmount: 8
   playerHeight: 1.1

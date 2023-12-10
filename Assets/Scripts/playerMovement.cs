@@ -24,7 +24,9 @@ public class playerMovement : MonoBehaviour
     [Header("Jump Height")]
 
     public float jumpForce;
+    private bool grounded;
 
+    // MoveState enum
     public enum MoveState
     {
         Walk,
@@ -32,11 +34,16 @@ public class playerMovement : MonoBehaviour
         crouch,
         wallRunning,
         Idle,
+        Slide,
     }
     public MoveState moveState;
     private MoveState oldState;
 
-    private bool grounded;
+    [Header("Sliding")]
+    public float slideThreshold;
+    public float slideCooldownTime;
+    private float slideCooldown;
+    public float slideDrag;
 
     [Header("Wall Running")]
     public float wallRunSpeedNeeded;
@@ -68,6 +75,7 @@ public class playerMovement : MonoBehaviour
     {
         moveSpeed = walkSpeed;
         wallRunCoolDown = wallRunCoolDownTime;
+        slideCooldown = slideCooldownTime;
     }
     void Update()
     {
@@ -88,6 +96,12 @@ public class playerMovement : MonoBehaviour
         {
             Quaternion playerRotation = Quaternion.Euler(0, playerCamera.transform.localRotation.eulerAngles.y, 0);
             transform.rotation = playerRotation;
+        }
+
+        if (moveState != MoveState.Slide && slideCooldown < slideCooldownTime)
+        {
+            Debug.Log("SlideCooling");
+            slideCooldown += Time.deltaTime;
         }
 
         groundCheck();
@@ -147,7 +161,14 @@ public class playerMovement : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.LeftControl) && grounded)
         {
-            moveState = MoveState.crouch;
+            if (playerSpeed > slideThreshold && slideCooldown >= slideCooldownTime)
+            {
+                moveState = MoveState.Slide;
+            }
+            else
+            {
+                moveState = MoveState.crouch;
+            }
         }
         else if (Input.GetKey(KeyCode.LeftShift) && (Input.GetAxisRaw("Vertical") >= 0))
         {
@@ -170,17 +191,42 @@ public class playerMovement : MonoBehaviour
     }
     void OnStateChange(MoveState newState, MoveState lastState)
     {
+        // Exiting State
         switch (lastState)
         {
+            case MoveState.Slide:
+                if (newState != MoveState.crouch)
+                {
+                    rb.transform.localScale = new Vector3(1, 1, 1);
+                }
+                slideCooldown = 0;
+                break;
             case MoveState.crouch:
-                rb.transform.localScale = new Vector3 (1,1,1);
+                if (newState != MoveState.Slide)
+                {
+                    rb.transform.localScale = new Vector3(1, 1, 1);
+                }
                 break;
         }
+        
+        // Entering State
         switch(newState)
         {
             case MoveState.crouch:
-                rb.transform.localScale = new Vector3(1, (float)0.5, 1);
-                rb.AddForce(0,-14,0, ForceMode.Impulse);
+                if (lastState != MoveState.Slide)
+                {
+                    rb.transform.localScale = new Vector3(1, (float)0.5, 1);
+                    rb.AddForce(0, -14, 0, ForceMode.Impulse);
+                }
+
+                moveSpeed = crouchSpeed;
+                break;
+            case MoveState.Slide:
+                if (lastState != MoveState.crouch)
+                {
+                    rb.transform.localScale = new Vector3(1, (float)0.5, 1);
+                    rb.AddForce(0, -14, 0, ForceMode.Impulse);
+                }
 
                 moveSpeed = crouchSpeed;
                 break;
