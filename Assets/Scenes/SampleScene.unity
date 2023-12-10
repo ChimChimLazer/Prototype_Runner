@@ -1401,7 +1401,7 @@ MonoBehaviour:
   moveState: 0
   wallRunSpeedNeeded: 5
   wallRunCoolDownTime: 0.1
-  wallRunMomentum: 45
+  wallRunMomentum: 50
   wallRunGrabForce: 15
   wallRunRotationAmount: 8
   playerHeight: 1.1

@@ -26,6 +26,8 @@ public class playerMovement : MonoBehaviour
         Run,
         crouch,
         wallRunning,
+        Idle,
+        Falling,
     }
     public MoveState moveState;
     private MoveState oldState;
@@ -137,9 +139,12 @@ public class playerMovement : MonoBehaviour
         {
             moveState = MoveState.Run;
         }
-        else
+        else if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
             moveState = MoveState.Walk;
+        } else
+        {
+            moveState = MoveState.Idle;
         }
         
         // checks if state has been changed
