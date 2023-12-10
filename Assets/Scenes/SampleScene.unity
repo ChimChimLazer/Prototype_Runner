@@ -1404,7 +1404,7 @@ MonoBehaviour:
   slideThreshold: 8
   slideCooldownTime: 0.5
   slideDrag: 2.5
-  slideForce: 45
+  slideForce: 40
   wallRunSpeedNeeded: 5
   wallRunCoolDownTime: 0.1
   wallRunMomentum: 30

@@ -237,7 +237,7 @@ public class playerMovement : MonoBehaviour
                 slideForceApplied = (transform.forward);
                 rb.AddForce(slideForceApplied.normalized * slideForce, ForceMode.Impulse);
 
-                moveSpeed = crouchSpeed;
+                moveSpeed = 0;
                 break;
             case MoveState.Walk:
                 moveSpeed = walkSpeed;
