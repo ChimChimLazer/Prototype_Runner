@@ -55,7 +55,7 @@ public class playerMovement : MonoBehaviour
     public static float wallRunCameraRotation;
     public float wallRunRotationAmount;
 
-    private bool walkRunReady;
+    private bool wallRunReady;
     private bool wallRunning = false;
     private float wallRunCoolDown;
 
@@ -91,7 +91,7 @@ public class playerMovement : MonoBehaviour
             wallRunCoolDown += Time.deltaTime;
         } else
         {
-            walkRunReady = !grounded && playerSpeed > wallRunSpeedNeeded && moveState != MoveState.Walk;
+            wallRunReady = !grounded && playerSpeed > wallRunSpeedNeeded && moveState != MoveState.Walk;
         }
 
         if (!wallRunning)
@@ -253,7 +253,7 @@ public class playerMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.layer == 8 && walkRunReady)
+        if (collision.gameObject.layer == 8 && wallRunReady)
         {
             Vector3 playerDirectionRight = transform.right;
 
