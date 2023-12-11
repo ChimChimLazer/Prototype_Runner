@@ -1877,9 +1877,10 @@ MonoBehaviour:
   wallRunRotationAmount: 9
   jumpPadForce: 25
   boostPadForce: 50
-  boostFOVIncrease: 0
+  boostFOV: 80
   playerHeight: 1.1
   playerWidth: 0.9
+  FOV: 60
   rb: {fileID: 1406991299}
   playerCamera: {fileID: 963194228}
 --- !u!54 &1406991299
@@ -2897,8 +2898,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallRunTiltSpeed: 10
+  FOVIncreaseSpeed: 0.5
   playerCamera: {fileID: 1845734508}
-  gameCamera: {fileID: 0}
+  gameCamera: {fileID: 1845734511}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

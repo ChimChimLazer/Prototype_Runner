@@ -5,10 +5,11 @@ using UnityEngine;
 public class cameraFX : MonoBehaviour
 {
     private float wallRunRotation;
-    private float boostFOV;
+    private float currentFOV;
 
     [Header("Modifiers")]
     public float wallRunTiltSpeed;
+    public float FOVIncreaseSpeed;
     [Header("References")]
     public GameObject playerCamera;
     public Camera gameCamera;
@@ -16,6 +17,7 @@ public class cameraFX : MonoBehaviour
     private void Start()
     {
         wallRunTiltSpeed = wallRunTiltSpeed / 100;
+        currentFOV = playerMovement.playerFOV;
     }
     void Update()
     {
@@ -31,11 +33,11 @@ public class cameraFX : MonoBehaviour
             // https://assetstore.unity.com/packages/tools/animation/leantween-3595#description
             LeanTween.rotateLocal(playerCamera, cameraTilt, wallRunTiltSpeed);
         }
-        if (boostFOV != playerMovement.playerFOV)
+        if (currentFOV != playerMovement.playerFOV)
         {
-            boostFOV = playerMovement.playerFOV;
+            currentFOV = Mathf.Lerp(currentFOV, playerMovement.playerFOV, FOVIncreaseSpeed*Time.deltaTime);
 
-            gameCamera.fieldOfView = boostFOV;
+            gameCamera.fieldOfView = currentFOV;
         }
     }
 }
