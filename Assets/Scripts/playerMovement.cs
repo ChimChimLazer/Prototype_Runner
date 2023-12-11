@@ -165,7 +165,7 @@ public class playerMovement : MonoBehaviour
         {
             moveState = MoveState.wallRunning;
         }
-        else if (Input.GetKey(KeyCode.LeftControl) && grounded)
+        else if ((Input.GetKey(KeyCode.LeftControl) || moveState == MoveState.Slide)&& grounded)
         {
             if (playerSpeed > slideThreshold && slideCooldown >= slideCooldownTime)
             {
