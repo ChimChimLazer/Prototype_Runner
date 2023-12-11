@@ -191,6 +191,11 @@ public class playerMovement : MonoBehaviour
         // checks if state has been changed
         if (moveState != oldState)
         {
+            if(moveState == MoveState.Slide) 
+            {
+                slideForceApplied = (transform.forward);
+                rb.AddForce(slideForceApplied.normalized * slideForce, ForceMode.Impulse);
+            }
             OnStateChange(moveState, oldState);
             oldState = moveState;
         }
@@ -233,9 +238,6 @@ public class playerMovement : MonoBehaviour
                     rb.transform.localScale = new Vector3(1, (float)0.5, 1);
                     rb.AddForce(0, -14, 0, ForceMode.Impulse);
                 }
-
-                slideForceApplied = (transform.forward);
-                rb.AddForce(slideForceApplied.normalized * slideForce, ForceMode.Impulse);
 
                 moveSpeed = 0;
                 break;
