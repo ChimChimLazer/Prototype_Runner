@@ -2898,7 +2898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallRunTiltSpeed: 10
-  FOVIncreaseSpeed: 0.5
+  FOVIncreaseSpeed: 3
   playerCamera: {fileID: 1845734508}
   gameCamera: {fileID: 1845734511}
 --- !u!1660057539 &9223372036854775807
