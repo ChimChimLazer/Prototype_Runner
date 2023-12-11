@@ -62,9 +62,10 @@ public class playerMovement : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
 
-    [Header("Jump Pads")]
+    [Header("Power Up Pads")]
     public float jumpPadForce;
-    private Vector3 jumpPadBoost;
+    public float boostPadForce;
+    private Vector3 padBoost;
 
     [Header("Player Stats")]
     public float playerHeight;
@@ -272,16 +273,23 @@ public class playerMovement : MonoBehaviour
 
             runningOnWall = collision.gameObject;
             startWallRun();
-        }
-    }
-    private void OnTriggerEnter(Collider trigger)
-    {
-        if(trigger.gameObject.tag == "Jump Pad")
+        } else if (collision.gameObject.tag == "Jump Pad")
         {
-            jumpPadBoost = (trigger.transform.up);
-            rb.AddForce(jumpPadBoost * jumpPadForce, ForceMode.VelocityChange);
+            padBoost = (collision.transform.up);
+            rb.AddForce(padBoost * jumpPadForce, ForceMode.VelocityChange);
+
+        } 
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.tag == "Boost Pad")
+        {
+            padBoost = (collision.transform.right);
+            rb.AddForce(padBoost * boostPadForce * 100 * Time.deltaTime, ForceMode.Acceleration);
         }
     }
+
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject == runningOnWall)
