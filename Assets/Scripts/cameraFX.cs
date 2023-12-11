@@ -5,11 +5,13 @@ using UnityEngine;
 public class cameraFX : MonoBehaviour
 {
     private float wallRunRotation;
+    private float boostFOV;
 
     [Header("Modifiers")]
     public float wallRunTiltSpeed;
     [Header("References")]
     public GameObject playerCamera;
+    public Camera gameCamera;
 
     private void Start()
     {
@@ -28,6 +30,12 @@ public class cameraFX : MonoBehaviour
             // Easing was created by using LeanTween by Dented Pixel
             // https://assetstore.unity.com/packages/tools/animation/leantween-3595#description
             LeanTween.rotateLocal(playerCamera, cameraTilt, wallRunTiltSpeed);
+        }
+        if (boostFOV != playerMovement.playerFOV)
+        {
+            boostFOV = playerMovement.playerFOV;
+
+            gameCamera.fieldOfView = boostFOV;
         }
     }
 }

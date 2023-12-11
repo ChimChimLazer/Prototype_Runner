@@ -62,9 +62,11 @@ public class playerMovement : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
 
-    [Header("Power Up Pads")]
+    [Header("Power Up Pads & Zones")]
     public float jumpPadForce;
+    
     public float boostPadForce;
+    public float boostFOV;
     private Vector3 padBoost;
 
     [Header("Player Stats")]
@@ -72,6 +74,8 @@ public class playerMovement : MonoBehaviour
     public float playerWidth;
     private Vector3 moveForce;
     private Vector3 slideForceApplied;
+    public static float playerFOV;
+    public float FOV;
 
     [Header("References")]
     public Rigidbody rb;
@@ -83,6 +87,7 @@ public class playerMovement : MonoBehaviour
         moveSpeed = walkSpeed;
         wallRunCoolDown = wallRunCoolDownTime;
         slideCooldown = slideCooldownTime;
+        playerFOV = FOV;
     }
     void Update()
     {
@@ -287,6 +292,7 @@ public class playerMovement : MonoBehaviour
         {
             padBoost = (collision.transform.right);
             rb.AddForce(padBoost * boostPadForce * 100 * Time.deltaTime, ForceMode.Acceleration);
+            playerFOV = boostFOV;
         }
     }
 
@@ -295,6 +301,10 @@ public class playerMovement : MonoBehaviour
         if (collision.gameObject == runningOnWall)
         {
             exitWallRun();
+        }
+        if (collision.gameObject.tag == "Boost Pad")
+        {
+            playerFOV = FOV;
         }
     }
 
