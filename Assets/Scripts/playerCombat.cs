@@ -15,7 +15,6 @@ public class playerCombat : MonoBehaviour
     public float regenerationCoolDownTime;
     private float regenerationCoolDown;
 
-    // Start is called before the first frame update
     void Start()
     {
         playerHealth = maxHealth;
@@ -23,7 +22,6 @@ public class playerCombat : MonoBehaviour
         regenerationCoolDown = regenerationCoolDownTime;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
