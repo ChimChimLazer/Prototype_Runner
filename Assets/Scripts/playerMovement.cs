@@ -278,19 +278,24 @@ public class playerMovement : MonoBehaviour
 
             runningOnWall = collision.gameObject;
             startWallRun();
-        } else if (collision.gameObject.tag == "Jump Pad")
-        {
-            padBoost = (collision.transform.up);
-            rb.AddForce(padBoost * jumpPadForce, ForceMode.VelocityChange);
-
-        } 
+        }
     }
 
-    private void OnCollisionStay(Collision collision)
+    void OnTriggerEnter(Collider trigger)
     {
-        if (collision.gameObject.tag == "Boost Pad")
+        if (trigger.gameObject.tag == "Jump Pad")
         {
-            padBoost = (collision.transform.right);
+            padBoost = (trigger.transform.up);
+            rb.AddForce(padBoost * jumpPadForce, ForceMode.VelocityChange);
+
+        }
+    }
+
+    void OnTriggerStay(Collider trigger)
+    {
+        if (trigger.gameObject.tag == "Boost Pad")
+        {
+            padBoost = (trigger.transform.right);
             rb.AddForce(padBoost * boostPadForce * 100 * Time.deltaTime, ForceMode.Acceleration);
             playerFOV = boostFOV;
         }
@@ -302,7 +307,12 @@ public class playerMovement : MonoBehaviour
         {
             exitWallRun();
         }
-        if (collision.gameObject.tag == "Boost Pad")
+        
+    }
+
+    void OnTriggerExit(Collider trigger)
+    {
+        if (trigger.gameObject.tag == "Boost Pad")
         {
             playerFOV = FOV;
         }
