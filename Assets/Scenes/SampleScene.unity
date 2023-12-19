@@ -6695,8 +6695,8 @@ MonoBehaviour:
   airDrag: 1.5
   jumpForce: 40
   jumpBufferTime: 0.3
-  OldGrounded: 0
-  OldWallRunning: 0
+  CoyoteTime: 0.2
+  CoyoteTimer: 0
   moveState: 0
   slideThreshold: 8
   slideCooldownTime: 0.5

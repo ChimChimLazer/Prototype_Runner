@@ -29,11 +29,11 @@ public class playerMovement : MonoBehaviour
     private float jumpBufferTimer;
 
     public float CoyoteTime;
-    public float CoyoteTimer;
+    private float CoyoteTimer;
 
     private bool grounded;
-    public bool OldGrounded;
-    public bool OldWallRunning;
+    private bool OldGrounded;
+    private bool OldWallRunning;
 
     // MoveState enum
     public enum MoveState
@@ -73,7 +73,8 @@ public class playerMovement : MonoBehaviour
 
     [Header("Power Up Pads & Zones")]
     public float jumpPadForce;
-    
+    private float jumpPadCheck;
+
     public float boostPadForce;
     public float boostFOV;
     private Vector3 padBoost;
@@ -99,6 +100,7 @@ public class playerMovement : MonoBehaviour
         playerFOV = FOV;
         jumpBufferTimer = 0;
 
+        jumpPadCheck = 0;
         OldGrounded = grounded;
         OldWallRunning = wallRunning;
     }
@@ -154,18 +156,25 @@ public class playerMovement : MonoBehaviour
             {
                 jumpBufferTimer = 0;
                 CoyoteTimer = 0;
-                if (grounded)
-                {
-                    rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
-                    grounded = false;
-                }
-                else if (wallRunning)
+                
+                if (wallRunning)
                 {
                     rb.AddForce(0, jumpForce * (float)1.5, 0, ForceMode.Impulse);
                     rb.AddForce(transform.forward * wallRunMomentum, ForceMode.Impulse);
                     exitWallRun();
                     grounded = false;
                 }
+                else
+                {
+                    rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
+                    grounded = false;
+                }
+            }
+        } else
+        {
+            if (Input.GetButtonDown("Jump"))
+            {
+                jumpBufferTimer = jumpBufferTime;
             }
         }
         if (grounded || wallRunning)
@@ -179,9 +188,6 @@ public class playerMovement : MonoBehaviour
             }
         } else
         {
-            if (Input.GetButtonDown("Jump")){
-                jumpBufferTimer = jumpBufferTime;
-            }
             rb.drag = airDrag;
         }
     }
@@ -199,7 +205,7 @@ public class playerMovement : MonoBehaviour
         {
             if (grounded == false && wallRunning == false) 
             {
-                if (!Input.GetButton("Jump"))
+                if (!Input.GetButton("Jump") && jumpPadCheck <= 0)
                 {
                     CoyoteTimer = CoyoteTime;
                 }
@@ -211,6 +217,11 @@ public class playerMovement : MonoBehaviour
             CoyoteTimer -= Time.deltaTime;
         }
 
+        // Jump Pad Coyote Time Fix
+        if (jumpPadCheck > 0)
+        {
+            jumpPadCheck -= Time.deltaTime;
+        }
         OldGrounded = grounded;
         OldWallRunning = wallRunning;
     }
@@ -336,6 +347,7 @@ public class playerMovement : MonoBehaviour
         {
             padBoost = (trigger.transform.up);
             rb.AddForce(padBoost * jumpPadForce, ForceMode.VelocityChange);
+            jumpPadCheck = 0.1f;
 
         }
     }
