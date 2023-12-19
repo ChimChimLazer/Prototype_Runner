@@ -28,7 +28,12 @@ public class playerMovement : MonoBehaviour
     public float jumpBufferTime;
     private float jumpBufferTimer;
 
+    public float CoyoteTime;
+    public float CoyoteTimer;
+
     private bool grounded;
+    public bool OldGrounded;
+    public bool OldWallRunning;
 
     // MoveState enum
     public enum MoveState
@@ -93,6 +98,9 @@ public class playerMovement : MonoBehaviour
         slideCooldown = slideCooldownTime;
         playerFOV = FOV;
         jumpBufferTimer = 0;
+
+        OldGrounded = grounded;
+        OldWallRunning = wallRunning;
     }
     void Update()
     {
@@ -122,7 +130,7 @@ public class playerMovement : MonoBehaviour
 
         groundCheck();
         jump();
-        jumpBuffering();
+        jumpBufferingAndCoyoteTime();
         moveStateHandler();
     }
     void FixedUpdate()
@@ -141,11 +149,11 @@ public class playerMovement : MonoBehaviour
     }
     void jump()
     {
-        if (grounded || wallRunning)
-        {
+        if (grounded || wallRunning || CoyoteTimer > 0) {
             if (Input.GetButtonDown("Jump") || jumpBufferTimer > 0)
             {
                 jumpBufferTimer = 0;
+                CoyoteTimer = 0;
                 if (grounded)
                 {
                     rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
@@ -159,7 +167,9 @@ public class playerMovement : MonoBehaviour
                     grounded = false;
                 }
             }
-
+        }
+        if (grounded || wallRunning)
+        {
             if (moveState == MoveState.Slide)
             {
                 rb.drag = slideDrag;
@@ -176,12 +186,33 @@ public class playerMovement : MonoBehaviour
         }
     }
 
-    void jumpBuffering()
+    void jumpBufferingAndCoyoteTime()
     {
+        // Jump Buffering
         if (jumpBufferTimer > 0)
         {
             jumpBufferTimer -= Time.deltaTime;
         }
+
+        // Coyote Time
+        if (OldGrounded != grounded || OldWallRunning != wallRunning)
+        {
+            if (grounded == false && wallRunning == false) 
+            {
+                if (!Input.GetButton("Jump"))
+                {
+                    CoyoteTimer = CoyoteTime;
+                }
+            }
+            
+
+        } else if (CoyoteTimer > 0)
+        {
+            CoyoteTimer -= Time.deltaTime;
+        }
+
+        OldGrounded = grounded;
+        OldWallRunning = wallRunning;
     }
 
     void groundCheck(){
