@@ -15,6 +15,12 @@ public class playerCombat : MonoBehaviour
     public float regenerationCoolDownTime;
     private float regenerationCoolDown;
 
+    [Header("Interaction")]
+    public float interactionDistance;
+    
+    [Header("References")]
+    public Transform playerCameraRotation;
+
     void Start()
     {
         playerHealth = maxHealth;
@@ -29,6 +35,7 @@ public class playerCombat : MonoBehaviour
             playerHealth -= 10;
         }
         healthRegeneration();
+        itemPickUp();
     }
     void healthRegeneration()
     {
@@ -53,5 +60,21 @@ public class playerCombat : MonoBehaviour
             }
         }
         lastFrameHealth = playerHealth;
+    }
+
+    void itemPickUp()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            RaycastHit hit;
+            if(Physics.Raycast(playerCameraRotation.position, playerCameraRotation.forward, out hit, interactionDistance))
+            {
+                if (hit.collider.tag == "Weapon")
+                {
+                    Debug.Log("Weapon Pick Up");
+                    hit.collider.gameObject.SetActive(false);
+                }
+            }
+        }
     }
 }
