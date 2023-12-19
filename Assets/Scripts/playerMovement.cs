@@ -21,9 +21,13 @@ public class playerMovement : MonoBehaviour
     public float airDrag;
 
 
-    [Header("Jump Height")]
+    [Header("Jumping")]
 
     public float jumpForce;
+
+    public float jumpBufferTime;
+    private float jumpBufferTimer;
+
     private bool grounded;
 
     // MoveState enum
@@ -88,6 +92,7 @@ public class playerMovement : MonoBehaviour
         wallRunCoolDown = wallRunCoolDownTime;
         slideCooldown = slideCooldownTime;
         playerFOV = FOV;
+        jumpBufferTimer = 0;
     }
     void Update()
     {
@@ -117,6 +122,7 @@ public class playerMovement : MonoBehaviour
 
         groundCheck();
         jump();
+        jumpBuffering();
         moveStateHandler();
     }
     void FixedUpdate()
@@ -137,8 +143,9 @@ public class playerMovement : MonoBehaviour
     {
         if (grounded || wallRunning)
         {
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") || jumpBufferTimer > 0)
             {
+                jumpBufferTimer = 0;
                 if (grounded)
                 {
                     rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
@@ -162,7 +169,18 @@ public class playerMovement : MonoBehaviour
             }
         } else
         {
+            if (Input.GetButtonDown("Jump")){
+                jumpBufferTimer = jumpBufferTime;
+            }
             rb.drag = airDrag;
+        }
+    }
+
+    void jumpBuffering()
+    {
+        if (jumpBufferTimer > 0)
+        {
+            jumpBufferTimer -= Time.deltaTime;
         }
     }
 
