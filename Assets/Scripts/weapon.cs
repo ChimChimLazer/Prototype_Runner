@@ -11,6 +11,7 @@ public class weapon : MonoBehaviour
 
     [Header("Misc Stats")]
     public Vector3 positionOffset;
+    public GameObject bullet;
 
     [Header("References")]
     public Rigidbody rb;
@@ -19,9 +20,17 @@ public class weapon : MonoBehaviour
 
     void Update()
     {
+        // If weapon is picked up
         if (current_user != null)
         {
             transform.rotation = current_user.rotation;
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(current_user.position, current_user.forward, out hit)) {
+                    Instantiate(bullet, transform.position, current_user.rotation);
+                }
+            }
         }
     }
 
