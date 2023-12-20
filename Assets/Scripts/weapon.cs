@@ -29,8 +29,9 @@ public class weapon : MonoBehaviour
     {
         //https://forum.unity.com/threads/deactivate-rigidbody.889837/
         current_user = user;
-        Rigidbody.Destroy(rb);
-        Collider.Destroy(collider);
+        rb.isKinematic = true;
+        rb.useGravity = false;
+        collider.enabled = false;
 
         // Moves Gun To Hand
         transform.SetParent(user.transform);
@@ -40,7 +41,9 @@ public class weapon : MonoBehaviour
     public void DropWeapon()
     {
         current_user = null;
-        Rigidbody.Instantiate(rb);
-        Collider.Instantiate(collider);
+
+        rb.isKinematic = false;
+        rb.useGravity = true;
+        collider.enabled = true;
     }
 }
