@@ -45,8 +45,9 @@ public class weapon : MonoBehaviour
         collider.enabled = true;
         rb.isKinematic = false;
         rb.useGravity = true;
-        
 
         transform.parent = null;
+
+        rb.AddForce(0f, 0.25f, 0f, ForceMode.Impulse);
     }
 }
