@@ -42,8 +42,11 @@ public class weapon : MonoBehaviour
     {
         current_user = null;
 
+        collider.enabled = true;
         rb.isKinematic = false;
         rb.useGravity = true;
-        collider.enabled = true;
+        
+
+        transform.parent = null;
     }
 }
