@@ -21,12 +21,7 @@ public class weapon : MonoBehaviour
     {
         if (current_user != null)
         {
-            Vector3 weaponOffset = (positionOffset.x * current_user.right) + (positionOffset.y * current_user.up) + (positionOffset.z * current_user.forward);
-
-            LeanTween.move(gameObject, current_user.position + weaponOffset, 0.05f);
-            //transform.position = current_user.position + weaponOffset;
             transform.rotation = current_user.rotation;
-            
         }
     }
 
@@ -36,12 +31,16 @@ public class weapon : MonoBehaviour
         current_user = user;
         Rigidbody.Destroy(rb);
         Collider.Destroy(collider);
+
+        // Moves Gun To Hand
+        transform.SetParent(user.transform);
+        transform.localPosition = positionOffset;
     }
 
     public void DropWeapon()
     {
         current_user = null;
-        //Rigidbody.Instantiate(rb);
-        //Collider.Instantiate(collider);
+        Rigidbody.Instantiate(rb);
+        Collider.Instantiate(collider);
     }
 }

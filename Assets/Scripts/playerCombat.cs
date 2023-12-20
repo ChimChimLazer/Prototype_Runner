@@ -17,7 +17,10 @@ public class playerCombat : MonoBehaviour
 
     [Header("Interaction")]
     public float interactionDistance;
-    
+
+    [Header("Weapons")]
+    public weapon CurrentWeapon;
+
     [Header("References")]
     public Transform playerCameraRotation;
 
@@ -71,7 +74,7 @@ public class playerCombat : MonoBehaviour
             {
                 if (hit.collider.tag == "Weapon")
                 {
-                    weapon CurrentWeapon = hit.collider.gameObject.GetComponent<weapon>();
+                    CurrentWeapon = hit.collider.gameObject.GetComponent<weapon>();
 
                     CurrentWeapon.pickUpWeapon(playerCameraRotation);
                 }
