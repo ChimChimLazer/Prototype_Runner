@@ -79,6 +79,10 @@ public class playerCombat : MonoBehaviour
                     CurrentWeapon.pickUpWeapon(playerCameraRotation);
                 }
             }
+        } else if (Input.GetKeyDown(KeyCode.Q) && CurrentWeapon != null)
+        {
+            Debug.Log("Drop");
+            CurrentWeapon.DropWeapon();
         }
     }
 }
