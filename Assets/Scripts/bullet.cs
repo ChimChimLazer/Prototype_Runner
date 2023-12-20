@@ -27,7 +27,7 @@ public class bullet : MonoBehaviour
     {
         if (collision.gameObject.tag != "Player")
         {
-            Debug.Log(collision.gameObject);
+            
             Destroy(gameObject);
         }
     }
