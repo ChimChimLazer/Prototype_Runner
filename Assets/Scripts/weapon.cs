@@ -24,13 +24,10 @@ public class weapon : MonoBehaviour
         if (current_user != null)
         {
             transform.rotation = current_user.rotation;
+
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                RaycastHit hit;
-                if (Physics.Raycast(current_user.position, current_user.forward, out hit)) {
-                    GameObject current_bullet = Instantiate(bullet, transform.position, transform.rotation);
-                    current_bullet.transform.LookAt(hit.point); // Bullet Faces Point
-                }
+                Shoot();
             }
         }
     }
@@ -59,5 +56,15 @@ public class weapon : MonoBehaviour
         transform.parent = null;
 
         rb.AddForce(0f, 0.25f, 0f, ForceMode.Impulse);
+    }
+
+    void Shoot()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(current_user.position, current_user.forward, out hit))
+        {
+            GameObject current_bullet = Instantiate(bullet, transform.position, transform.rotation);
+            current_bullet.transform.LookAt(hit.point); // Bullet Faces Point
+        }
     }
 }
