@@ -64,6 +64,8 @@ public class weapon : MonoBehaviour
         if (Physics.Raycast(current_user.position, current_user.forward, out hit))
         {
             GameObject current_bullet = Instantiate(bullet, transform.position, transform.rotation);
+            // https://discussions.unity.com/t/how-do-i-make-an-object-always-face-the-player/5486
+            // https://docs.unity3d.com/ScriptReference/Transform.LookAt.html
             current_bullet.transform.LookAt(hit.point); // Bullet Faces Point
         }
     }
