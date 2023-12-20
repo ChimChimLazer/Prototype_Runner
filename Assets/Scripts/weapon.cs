@@ -28,7 +28,8 @@ public class weapon : MonoBehaviour
             {
                 RaycastHit hit;
                 if (Physics.Raycast(current_user.position, current_user.forward, out hit)) {
-                    Instantiate(bullet, transform.position, current_user.rotation);
+                    GameObject current_bullet = Instantiate(bullet, transform.position, transform.rotation);
+                    current_bullet.transform.LookAt(hit.point); // Bullet Faces Point
                 }
             }
         }

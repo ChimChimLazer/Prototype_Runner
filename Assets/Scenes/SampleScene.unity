@@ -591,6 +591,7 @@ MonoBehaviour:
   rateOfFire: 5
   damage: 10
   positionOffset: {x: 0.6, y: -0.25, z: 0.5}
+  bullet: {fileID: 1557525636942584757, guid: 43d3a99b6def3424798830f49f0f419c, type: 3}
   rb: {fileID: 238444660}
   collider: {fileID: 238444665}
 --- !u!1 &347667490
@@ -6987,6 +6988,7 @@ MonoBehaviour:
   regenerationRate: 30
   regenerationCoolDownTime: 0.5
   interactionDistance: 4
+  CurrentWeapon: {fileID: 0}
   playerCameraRotation: {fileID: 963194228}
 --- !u!1 &1470494196
 GameObject:
@@ -7551,7 +7553,7 @@ GameObject:
   - component: {fileID: 1645496199}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
