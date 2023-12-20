@@ -71,8 +71,9 @@ public class playerCombat : MonoBehaviour
             {
                 if (hit.collider.tag == "Weapon")
                 {
-                    Debug.Log("Weapon Pick Up");
-                    hit.collider.gameObject.SetActive(false);
+                    weapon CurrentWeapon = hit.collider.gameObject.GetComponent<weapon>();
+
+                    CurrentWeapon.pickUpWeapon(playerCameraRotation);
                 }
             }
         }
