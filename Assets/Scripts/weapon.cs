@@ -100,7 +100,7 @@ public class weapon : MonoBehaviour
             StartCoroutine(SpawnTrail(trail, hit));
             if (hit.collider.tag == "Enemy")
             {
-                enemyHealth enemyHit = hit.collider.gameObject.GetComponent<enemyHealth>();
+                enemyHealth enemyHit = hit.collider.gameObject.GetComponentInParent<enemyHealth>();
 
                 enemyHit.removeHealth(damage);
             }
