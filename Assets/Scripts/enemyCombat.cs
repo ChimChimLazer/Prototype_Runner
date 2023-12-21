@@ -7,8 +7,9 @@ public class enemyCombat : MonoBehaviour
     
     [SerializeField] Transform orientation;
     [SerializeField] Transform body;
-
+    
     [SerializeField] GameObject gun;
+    [SerializeField] Transform muzzle;
     [SerializeField] GameObject bulletPrefab;
 
     [SerializeField] GameObject target;
@@ -20,6 +21,8 @@ public class enemyCombat : MonoBehaviour
         Quaternion enemyRotation = Quaternion.Euler(0, orientation.transform.localRotation.eulerAngles.y, 0);
         body.rotation = enemyRotation;
 
+        gun.transform.LookAt(target.transform.position, Vector3.forward);
+
         if (Input.GetKeyDown(KeyCode.J))
         {
             shoot();
@@ -28,6 +31,6 @@ public class enemyCombat : MonoBehaviour
 
     void shoot()
     {
-        Instantiate(bulletPrefab, gun.transform.position, gun.transform.rotation);
+        Instantiate(bulletPrefab, muzzle.transform.position, gun.transform.rotation);
     }
 }
