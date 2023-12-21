@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class weapon : MonoBehaviour
@@ -67,6 +68,12 @@ public class weapon : MonoBehaviour
             TrailRenderer trail = Instantiate(bulletTrail, muzzle.position, Quaternion.identity);
 
             StartCoroutine(SpawnTrail(trail, hit));
+            if (hit.collider.tag == "Enemy")
+            {
+                enemyCombat enemyHit = hit.collider.gameObject.GetComponent<enemyCombat>();
+                enemyHit.removeHealth(damage);
+                
+            }
         }
     }
 
