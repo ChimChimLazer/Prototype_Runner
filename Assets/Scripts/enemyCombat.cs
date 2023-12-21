@@ -30,7 +30,7 @@ public class enemyCombat : MonoBehaviour
         setRotation();
 
         RaycastHit hit;
-        if (Physics.Raycast(muzzle.position, gun.transform.forward, out hit)){
+        if (Physics.Raycast(orientation.position, orientation.forward, out hit)){
             if(hit.collider.tag == "Player")
             {
                 attcking = true;
