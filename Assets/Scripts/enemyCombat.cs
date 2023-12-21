@@ -15,12 +15,11 @@ public class enemyCombat : MonoBehaviour
 
     void Update()
     {
-        // Quaternion playerRotation = Quaternion.Euler(0, playerCamera.transform.localRotation.eulerAngles.y, 0);
         orientation.LookAt(target.transform.position);
 
         Quaternion enemyRotation = Quaternion.Euler(0, orientation.transform.localRotation.eulerAngles.y, 0);
-        Debug.Log(enemyRotation.ToString());
         body.rotation = enemyRotation;
+
         if (Input.GetKeyDown(KeyCode.J))
         {
             shoot();
