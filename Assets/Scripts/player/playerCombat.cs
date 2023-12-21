@@ -85,4 +85,18 @@ public class playerCombat : MonoBehaviour
             CurrentWeapon.DropWeapon();
         }
     }
+
+    public void removeHealth(float damage)
+    {
+        playerHealth -= damage;
+
+        if (playerHealth <= 0) 
+        {
+            playerDie();
+        }
+    }
+
+    private void playerDie() {
+        Debug.Log("You are dead");
+    }
 }
