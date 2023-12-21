@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class enemyCombat : MonoBehaviour
 {
-    
+    [Header("Enemy Stats")]
+    public float rateOfFire;
+
     [SerializeField] Transform orientation;
     [SerializeField] Transform body;
     
@@ -13,6 +15,15 @@ public class enemyCombat : MonoBehaviour
     [SerializeField] GameObject bulletPrefab;
 
     [SerializeField] GameObject target;
+
+    public float attackReady;
+    private bool attcking;
+
+    private void Start()
+    {
+        attcking = false;
+        attackReady = rateOfFire;
+    }
 
     void Update()
     {
@@ -25,12 +36,31 @@ public class enemyCombat : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            shoot();
+            if(attcking)
+            {
+                attcking = false;
+            } else
+            {
+                attcking = true;
+            }
+        }
+
+        if (attackReady >= rateOfFire)
+        {
+            if (attcking == true)
+            {
+                shoot();
+            }
+        }
+        else
+        {
+            attackReady += Time.deltaTime;
         }
     }
 
     void shoot()
     {
+        attackReady = 0;
         Instantiate(bulletPrefab, muzzle.transform.position, gun.transform.rotation);
     }
 }
