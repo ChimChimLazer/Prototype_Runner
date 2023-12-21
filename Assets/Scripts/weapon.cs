@@ -11,7 +11,7 @@ public class weapon : MonoBehaviour
 
     [Header("Misc Stats")]
     public Vector3 positionOffset;
-    public GameObject bullet;
+    public TrailRenderer bulletTrail;
 
     [Header("References")]
     public Rigidbody rb;
@@ -63,10 +63,26 @@ public class weapon : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(current_user.position, current_user.forward, out hit))
         {
-            GameObject current_bullet = Instantiate(bullet, transform.position, transform.rotation);
-            // https://discussions.unity.com/t/how-do-i-make-an-object-always-face-the-player/5486
-            // https://docs.unity3d.com/ScriptReference/Transform.LookAt.html
-            current_bullet.transform.LookAt(hit.point); // Bullet Faces Point
+            TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
+
+            StartCoroutine(SpawnTrail(trail, hit));
         }
+    }
+
+    // https://www.youtube.com/watch?v=cI3E7_f74MA
+    private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
+    {
+        float time = 0;
+        Vector3 startPosition = trail.transform.position;
+
+        while (time < 1)
+        {
+            trail.transform.position = Vector3.Lerp(startPosition, hit.point, time);
+            time += Time.deltaTime / trail.time;
+
+            yield return null;
+        }
+
+        Destroy(trail.gameObject, trail.time);
     }
 }
