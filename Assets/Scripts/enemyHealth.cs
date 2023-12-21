@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyCombat : MonoBehaviour
+public class enemyHealth : MonoBehaviour
 {
     [Header("Health")]
     [SerializeField] float maxHealth;
