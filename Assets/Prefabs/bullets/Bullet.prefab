@@ -147,8 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11caedcf10d31164c9ab3d4aaedb5d15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exitSpeed: 25
+  speed: 30
   damage: 30
+  despawnTime: 5
 --- !u!1 &6756888717867117015
 GameObject:
   m_ObjectHideFlags: 0

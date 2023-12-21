@@ -4,17 +4,31 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    public float exitSpeed;
+    public float speed;
     public float damage;
+    public float despawnTime;
+
+    private float timeAlive;
     private Rigidbody rb;
 
     private void Start()
     {
+        timeAlive = 0;
         rb = GetComponent<Rigidbody>();
 
-        Vector3 bulletForce = transform.forward * exitSpeed;
+        Vector3 bulletForce = transform.forward * speed;
 
         rb.AddForce(bulletForce, ForceMode.Impulse);
+    }
+
+    private void Update()
+    {
+        timeAlive += Time.deltaTime;
+
+        if (timeAlive >= despawnTime)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -26,6 +40,7 @@ public class bullet : MonoBehaviour
                 playerCombat playerHit = collision.gameObject.GetComponentInParent<playerCombat>();
                 playerHit.removeHealth(damage);
             }
+
             Destroy(gameObject);
         }
     }
