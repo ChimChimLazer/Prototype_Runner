@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class enemyCombat : MonoBehaviour
 {
+    
+    [SerializeField] Transform orientation;
+    [SerializeField] Transform body;
+
     [SerializeField] GameObject gun;
     [SerializeField] GameObject bulletPrefab;
 
@@ -11,8 +15,12 @@ public class enemyCombat : MonoBehaviour
 
     void Update()
     {
-        gun.transform.LookAt(target.transform.position);
+        // Quaternion playerRotation = Quaternion.Euler(0, playerCamera.transform.localRotation.eulerAngles.y, 0);
+        orientation.LookAt(target.transform.position);
 
+        Quaternion enemyRotation = Quaternion.Euler(0, orientation.transform.localRotation.eulerAngles.y, 0);
+        Debug.Log(enemyRotation.ToString());
+        body.rotation = enemyRotation;
         if (Input.GetKeyDown(KeyCode.J))
         {
             shoot();
