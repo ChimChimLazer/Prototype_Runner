@@ -16,7 +16,7 @@ public class enemyCombat : MonoBehaviour
 
     [SerializeField] GameObject target;
 
-    public float attackReady;
+    private float attackReady;
     private bool attcking;
 
     private void Start()
@@ -27,12 +27,7 @@ public class enemyCombat : MonoBehaviour
 
     void Update()
     {
-        orientation.LookAt(target.transform.position);
-
-        Quaternion enemyRotation = Quaternion.Euler(0, orientation.transform.localRotation.eulerAngles.y, 0);
-        body.rotation = enemyRotation;
-
-        gun.transform.LookAt(target.transform.position, Vector3.forward);
+        setRotation();
 
         if (Input.GetKeyDown(KeyCode.J))
         {
@@ -62,5 +57,15 @@ public class enemyCombat : MonoBehaviour
     {
         attackReady = 0;
         Instantiate(bulletPrefab, muzzle.transform.position, gun.transform.rotation);
+    }
+
+    void setRotation()
+    {
+        orientation.LookAt(target.transform.position);
+
+        Quaternion enemyRotation = Quaternion.Euler(0, orientation.transform.localRotation.eulerAngles.y, 0);
+        body.rotation = enemyRotation;
+
+        gun.transform.LookAt(target.transform.position, Vector3.forward);
     }
 }
