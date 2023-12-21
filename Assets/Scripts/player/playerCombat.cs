@@ -37,6 +37,7 @@ public class playerCombat : MonoBehaviour
         {
             playerHealth -= 10;
         }
+
         healthRegeneration();
         itemPickUp();
     }

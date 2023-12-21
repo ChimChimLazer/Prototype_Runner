@@ -7,8 +7,13 @@ public class weapon : MonoBehaviour
 {
     [Header("Game Stats")]
     public string weaponName;
+
     public float rateOfFire;
     public float damage;
+
+    public bool fullAuto;
+
+    private float bulletReady;
 
     [Header("Misc Stats")]
     public Vector3 positionOffset;
@@ -20,6 +25,11 @@ public class weapon : MonoBehaviour
     public new Collider collider;
     private Transform current_user;
 
+    private void Start()
+    {
+        bulletReady = rateOfFire;
+    }
+
     void Update()
     {
         // If weapon is picked up
@@ -27,9 +37,13 @@ public class weapon : MonoBehaviour
         {
             transform.rotation = current_user.rotation;
 
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Mouse0) && bulletReady >= rateOfFire)
             {
                 Shoot();
+
+            } else if (bulletReady < rateOfFire)
+            {
+                bulletReady += Time.deltaTime;
             }
         }
     }
@@ -62,6 +76,7 @@ public class weapon : MonoBehaviour
 
     void Shoot()
     {
+        bulletReady = 0;
         RaycastHit hit;
         if (Physics.Raycast(current_user.position, current_user.forward, out hit))
         {
@@ -71,8 +86,8 @@ public class weapon : MonoBehaviour
             if (hit.collider.tag == "Enemy")
             {
                 enemyCombat enemyHit = hit.collider.gameObject.GetComponent<enemyCombat>();
+
                 enemyHit.removeHealth(damage);
-                
             }
         }
     }

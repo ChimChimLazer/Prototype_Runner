@@ -560,7 +560,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238444659}
-  m_Material: {fileID: 13400000, guid: 1c51ad3fa490bdd43b4af60a837ea050, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -589,8 +589,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Test Weapon
-  rateOfFire: 5
+  rateOfFire: 60
   damage: 10
+  fullAuto: 1
   positionOffset: {x: 0.6, y: -0.25, z: 0.5}
   muzzle: {fileID: 1079665253}
   bulletTrail: {fileID: 1159345675714002614, guid: a4e5d510b6ea0b74aaeb45066ef39fa9, type: 3}
