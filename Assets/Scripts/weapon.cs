@@ -35,7 +35,7 @@ public class weapon : MonoBehaviour
         // If weapon is picked up
         if (current_user != null)
         {
-            transform.rotation = current_user.rotation;
+            
 
             if (fullAuto)
             {
@@ -69,6 +69,7 @@ public class weapon : MonoBehaviour
         rb.isKinematic = true;
         rb.useGravity = false;
         collider.enabled = false;
+        transform.rotation = current_user.rotation;
 
         // Moves Gun To Hand
         transform.SetParent(user.transform);
