@@ -549,7 +549,8 @@ Transform:
   m_LocalPosition: {x: 40, y: 0.6, z: -40}
   m_LocalScale: {x: 0.15, y: 0.15, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1079665253}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &238444665
@@ -591,7 +592,8 @@ MonoBehaviour:
   rateOfFire: 5
   damage: 10
   positionOffset: {x: 0.6, y: -0.25, z: 0.5}
-  bullet: {fileID: 1557525636942584757, guid: 43d3a99b6def3424798830f49f0f419c, type: 3}
+  muzzle: {fileID: 1079665253}
+  bulletTrail: {fileID: 1159345675714002614, guid: a4e5d510b6ea0b74aaeb45066ef39fa9, type: 3}
   rb: {fileID: 238444660}
   collider: {fileID: 238444665}
 --- !u!1 &347667490
@@ -6332,6 +6334,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1079665252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1079665253}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1079665253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079665252}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.488}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 238444664}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1090461503
 GameObject:
   m_ObjectHideFlags: 0

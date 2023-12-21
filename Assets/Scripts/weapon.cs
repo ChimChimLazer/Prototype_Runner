@@ -11,6 +11,7 @@ public class weapon : MonoBehaviour
 
     [Header("Misc Stats")]
     public Vector3 positionOffset;
+    public Transform muzzle;
     public TrailRenderer bulletTrail;
 
     [Header("References")]
@@ -63,7 +64,7 @@ public class weapon : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(current_user.position, current_user.forward, out hit))
         {
-            TrailRenderer trail = Instantiate(bulletTrail, transform.position, Quaternion.identity);
+            TrailRenderer trail = Instantiate(bulletTrail, muzzle.position, Quaternion.identity);
 
             StartCoroutine(SpawnTrail(trail, hit));
         }
