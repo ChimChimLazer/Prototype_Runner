@@ -37,13 +37,27 @@ public class weapon : MonoBehaviour
         {
             transform.rotation = current_user.rotation;
 
-            if (Input.GetKey(KeyCode.Mouse0) && bulletReady >= rateOfFire)
+            if (fullAuto)
             {
-                Shoot();
-
-            } else if (bulletReady < rateOfFire)
+                if (Input.GetKey(KeyCode.Mouse0) && bulletReady >= rateOfFire)
+                {
+                    Shoot();
+                }
+                else if (bulletReady < rateOfFire)
+                {
+                    bulletReady += Time.deltaTime;
+                }
+            }
+            else
             {
-                bulletReady += Time.deltaTime;
+                if (Input.GetKeyDown(KeyCode.Mouse0) && bulletReady >= rateOfFire)
+                {
+                    Shoot();
+                }
+                else if (bulletReady < rateOfFire)
+                {
+                    bulletReady += Time.deltaTime;
+                }
             }
         }
     }
