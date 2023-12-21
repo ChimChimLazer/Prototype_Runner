@@ -29,15 +29,19 @@ public class enemyCombat : MonoBehaviour
     {
         setRotation();
 
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            if(attcking)
-            {
-                attcking = false;
-            } else
+        RaycastHit hit;
+        if (Physics.Raycast(muzzle.position, gun.transform.forward, out hit)){
+            if(hit.collider.tag == "Player")
             {
                 attcking = true;
             }
+            else
+            {
+                attcking = false;
+            }
+        } else
+        {
+            attcking = false;
         }
 
         if (attackReady >= rateOfFire)
