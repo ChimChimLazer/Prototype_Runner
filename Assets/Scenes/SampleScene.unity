@@ -992,6 +992,7 @@ MonoBehaviour:
   - {fileID: 808499967}
   - {fileID: 284126876}
   detectionSpeed: 2
+  detectionCoolOffTime: 8
 --- !u!114 &361338400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7894,7 +7895,7 @@ MonoBehaviour:
   maxHealth: 100
   regenerationRate: 20
   regenerationCoolDownTime: 3
-  interactionDistance: 3.5
+  interactionDistance: 4
   CurrentWeapon: {fileID: 0}
   playerCameraRotation: {fileID: 963194228}
 --- !u!1 &1470494196

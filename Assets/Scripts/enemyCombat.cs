@@ -9,6 +9,7 @@ public class enemyCombat : MonoBehaviour
     [Header("Enemy Stats")]
     public float rateOfFire;
 
+    [Header("References")]
     [SerializeField] Transform orientation;
     [SerializeField] Transform body;
 
@@ -31,6 +32,8 @@ public class enemyCombat : MonoBehaviour
         patrol,
         point,
     }
+
+    [Header("Idle")]
     public idle idleType;
 
     public Transform[] patrolPoints;
@@ -39,10 +42,15 @@ public class enemyCombat : MonoBehaviour
 
     private Vector3 point;
 
+    [Header("Player Detection")]
+    public float detectionSpeed;
+    public float detectionCoolOffTime;
+
+    private float detectionTimer;
+    private float detectionCoolOff;
+
     private bool canSeePlayer;
     private bool playerDetected;
-    private float detectionTimer;
-    public float detectionSpeed;
 
     private NavMeshAgent agent;
     private float agentDisableTimer;
@@ -211,9 +219,25 @@ public class enemyCombat : MonoBehaviour
                 {
                     playerDetected = true;
                 }
+
             } else
             {
                 detectionTimer = 0;
+            }
+        } else
+        {
+            if (!canSeePlayer)
+            {
+                detectionCoolOff += Time.deltaTime;
+
+                if(detectionCoolOff >= detectionCoolOffTime)
+                {
+                    playerDetected = false;
+                }
+            }
+            else
+            {
+                detectionCoolOff = 0;
             }
         }
     }
