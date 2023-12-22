@@ -26,6 +26,7 @@ public class enemyCombat : MonoBehaviour
 
 
     private NavMeshAgent agent;
+    private float agentDisableTimer;
     private float attackReady;
     private bool attcking;
 
@@ -76,8 +77,17 @@ public class enemyCombat : MonoBehaviour
 
             case enemyState.attcking:
 
-                agent.enabled = false;
-
+                if (agent.enabled) {
+                    if (agentDisableTimer <= 0)
+                    {
+                        agent.enabled = false;
+                    } else
+                    {
+                        agentDisableTimer -= Time.deltaTime;
+                    }
+                   
+                }
+                
                 setRotation();
 
                 if (attackReady >= rateOfFire)
@@ -114,6 +124,7 @@ public class enemyCombat : MonoBehaviour
 
     void chase()
     {
+        agentDisableTimer = 0.25f;
         agent.SetDestination(target.transform.position);
     }
 }
