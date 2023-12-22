@@ -33,11 +33,6 @@ public class playerCombat : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            playerHealth -= 10;
-        }
-
         healthRegeneration();
         itemPickUp();
     }

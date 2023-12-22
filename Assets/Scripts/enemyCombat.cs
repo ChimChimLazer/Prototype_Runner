@@ -23,6 +23,7 @@ public class enemyCombat : MonoBehaviour
         chasing,
     }
     public enemyState state;
+    private bool playerDetected;
 
 
     private NavMeshAgent agent;
@@ -44,15 +45,30 @@ public class enemyCombat : MonoBehaviour
         if (Physics.Raycast(orientation.position, orientation.forward, out hit)){
             if(hit.collider.tag == "Player")
             {
+                playerDetected = true;
                 state = enemyState.attcking;
             }
             else
             {
-                state = enemyState.chasing;
+                if (playerDetected)
+                {
+                    state = enemyState.chasing;
+                } else
+                {
+                    state = enemyState.idle;
+                }
+                
             }
         } else
         {
-            state = enemyState.chasing;
+            if (playerDetected)
+            {
+                state = enemyState.chasing;
+            }
+            else
+            {
+                state = enemyState.idle;
+            }
         }
 
         switch (state)
