@@ -17,12 +17,20 @@ public class enemyCombat : MonoBehaviour
 
     [SerializeField] GameObject target;
 
-    public enum enemyState{
+    private enum enemyState{
         idle,
         attcking,
         chasing,
     }
-    public enemyState state;
+    private enemyState state;
+
+    public enum idle
+    {
+        idle,
+        patrol,
+        point,
+    }
+    public idle idleType;
     private bool playerDetected;
 
 
@@ -77,6 +85,17 @@ public class enemyCombat : MonoBehaviour
 
                 agent.enabled = false;
 
+                switch (idleType)
+                {
+                    case idle.idle:
+
+                        break;
+
+                    case idle.patrol: 
+
+                        break;
+                    case idle.point:
+                }
                 break;
 
             case enemyState.chasing:
