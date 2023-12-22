@@ -16,7 +16,6 @@ public class enemyHealth : MonoBehaviour
     public void removeHealth(float damange)
     {
         health -= damange;
-        Debug.Log(gameObject + " Health = " + health);
 
         if (health <= 0)
         {

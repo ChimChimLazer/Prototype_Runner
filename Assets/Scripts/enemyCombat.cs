@@ -55,7 +55,6 @@ public class enemyCombat : MonoBehaviour
 
         patrolNumber = 0;
         patrolCount = patrolPoints.Length-1;
-        Debug.Log(patrolCount);
     }
 
     void Update()
