@@ -28,7 +28,6 @@ public class enemyCombat : MonoBehaviour
     private NavMeshAgent agent;
     private float agentDisableTimer;
     private float attackReady;
-    private bool attcking;
 
     private void Start()
     {
@@ -92,16 +91,12 @@ public class enemyCombat : MonoBehaviour
 
                 if (attackReady >= rateOfFire)
                 {
-                    if (attcking == true)
-                    {
-                        shoot();
-                    }
+                    shoot();
                 }
                 else
                 {
                     attackReady += Time.deltaTime;
                 }
-
                 break;
         }
     }
