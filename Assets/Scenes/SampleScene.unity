@@ -955,7 +955,7 @@ MonoBehaviour:
   muzzle: {fileID: 1892060662}
   bulletPrefab: {fileID: 4117082160209935669, guid: a57d28a4593ede5449fb9376b517a45e, type: 3}
   target: {fileID: 1406991296}
-  state: 0
+  idleType: 2
 --- !u!114 &361338400
 MonoBehaviour:
   m_ObjectHideFlags: 0

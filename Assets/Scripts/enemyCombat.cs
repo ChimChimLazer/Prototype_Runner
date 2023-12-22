@@ -97,12 +97,8 @@ public class enemyCombat : MonoBehaviour
                         break;
 
                     case idle.point:
-                        
-                        agent.enabled = true;
 
-                        body.localRotation = Quaternion.Euler(0, 0, 0);
-
-                        agent.SetDestination(point);
+                        GoTo(point);
 
                         break;
                 }
@@ -110,11 +106,7 @@ public class enemyCombat : MonoBehaviour
 
             case enemyState.chasing:
 
-                agent.enabled = true;
-                
-                body.localRotation = Quaternion.Euler(0, 0, 0);
-
-                chase();
+                GoTo(target.transform.position);
 
                 break;
 
@@ -161,9 +153,13 @@ public class enemyCombat : MonoBehaviour
         gun.transform.LookAt(target.transform.position, Vector3.forward);
     }
 
-    void chase()
+    void GoTo(Vector3 targetPosition)
     {
+        agent.enabled = true;
+
+        body.localRotation = Quaternion.Euler(0, 0, 0);
+
         agentDisableTimer = 0.25f;
-        agent.SetDestination(target.transform.position);
+        agent.SetDestination(targetPosition);
     }
 }
