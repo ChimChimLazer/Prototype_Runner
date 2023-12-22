@@ -17,6 +17,14 @@ public class enemyCombat : MonoBehaviour
 
     [SerializeField] GameObject target;
 
+    public enum enemyState{
+        idle,
+        attcking,
+        chasing,
+    }
+    public enemyState state;
+
+
     private NavMeshAgent agent;
     private float attackReady;
     private bool attcking;
@@ -31,34 +39,60 @@ public class enemyCombat : MonoBehaviour
 
     void Update()
     {
-        chase();
-        //setRotation();
+        orientation.LookAt(target.transform.position);
 
         RaycastHit hit;
         if (Physics.Raycast(orientation.position, orientation.forward, out hit)){
             if(hit.collider.tag == "Player")
             {
-                attcking = true;
+                state = enemyState.attcking;
             }
             else
             {
-                attcking = false;
+                state = enemyState.chasing;
             }
         } else
         {
-            attcking = false;
+            state = enemyState.chasing;
         }
 
-        if (attackReady >= rateOfFire)
+        switch (state)
         {
-            if (attcking == true)
-            {
-                shoot();
-            }
-        }
-        else
-        {
-            attackReady += Time.deltaTime;
+            case enemyState.idle:
+
+                agent.enabled = false;
+
+                break;
+
+            case enemyState.chasing:
+
+                agent.enabled = true;
+                body.rotation = Quaternion.Euler(0, 0, 0);
+                gun.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+                chase();
+
+                break;
+
+            case enemyState.attcking:
+
+                agent.enabled = false;
+
+                setRotation();
+
+                if (attackReady >= rateOfFire)
+                {
+                    if (attcking == true)
+                    {
+                        shoot();
+                    }
+                }
+                else
+                {
+                    attackReady += Time.deltaTime;
+                }
+
+                break;
         }
     }
 
@@ -70,7 +104,7 @@ public class enemyCombat : MonoBehaviour
 
     void setRotation()
     {
-        orientation.LookAt(target.transform.position);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
 
         Quaternion enemyRotation = Quaternion.Euler(0, orientation.transform.localRotation.eulerAngles.y, 0);
         body.rotation = enemyRotation;
