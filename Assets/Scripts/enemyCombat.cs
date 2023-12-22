@@ -11,14 +11,14 @@ public class enemyCombat : MonoBehaviour
 
     [SerializeField] Transform orientation;
     [SerializeField] Transform body;
-    
+
     [SerializeField] GameObject gun;
     [SerializeField] Transform muzzle;
     [SerializeField] GameObject bulletPrefab;
 
     [SerializeField] GameObject target;
 
-    private enum enemyState{
+    private enum enemyState {
         idle,
         attcking,
         chasing,
@@ -32,6 +32,11 @@ public class enemyCombat : MonoBehaviour
         point,
     }
     public idle idleType;
+
+    public Transform[] patrolPoints;
+    private int patrolCount;
+    private int patrolNumber;
+
     private Vector3 point;
 
     private bool playerDetected;
@@ -47,6 +52,10 @@ public class enemyCombat : MonoBehaviour
         point = transform.position;
 
         attackReady = rateOfFire;
+
+        patrolNumber = 0;
+        patrolCount = patrolPoints.Length-1;
+        Debug.Log(patrolCount);
     }
 
     void Update()
@@ -93,7 +102,21 @@ public class enemyCombat : MonoBehaviour
                         break;
 
                     case idle.patrol:
-                        agent.enabled = true;
+
+                        Vector3 currentPatrolPoint = patrolPoints[patrolNumber].position;
+
+                        GoTo(currentPatrolPoint);
+
+                        if (transform.position.x == currentPatrolPoint.x && transform.position.z == currentPatrolPoint.z)
+                        {
+                            if(patrolNumber == patrolCount)
+                            {
+                                patrolNumber = 0;
+                            } else
+                            {
+                                patrolNumber += 1;
+                            }
+                        }
                         break;
 
                     case idle.point:
