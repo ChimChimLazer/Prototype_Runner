@@ -87,14 +87,13 @@ public class enemyCombat : MonoBehaviour
 
                 switch (idleType)
                 {
-                    case idle.idle:
-
-                        break;
-
                     case idle.patrol: 
 
                         break;
+
                     case idle.point:
+
+                        break;
                 }
                 break;
 
