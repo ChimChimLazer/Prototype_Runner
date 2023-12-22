@@ -67,9 +67,10 @@ public class enemyCombat : MonoBehaviour
             case enemyState.chasing:
 
                 agent.enabled = true;
-                chase();
+                
                 body.localRotation = Quaternion.Euler(0, 0, 0);
-                gun.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+                chase();
 
                 break;
 
