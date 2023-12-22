@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class enemyCombat : MonoBehaviour
 {
@@ -16,18 +17,22 @@ public class enemyCombat : MonoBehaviour
 
     [SerializeField] GameObject target;
 
+    private NavMeshAgent agent;
     private float attackReady;
     private bool attcking;
 
     private void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+
         attcking = false;
         attackReady = rateOfFire;
     }
 
     void Update()
     {
-        setRotation();
+        chase();
+        //setRotation();
 
         RaycastHit hit;
         if (Physics.Raycast(orientation.position, orientation.forward, out hit)){
@@ -71,5 +76,10 @@ public class enemyCombat : MonoBehaviour
         body.rotation = enemyRotation;
 
         gun.transform.LookAt(target.transform.position, Vector3.forward);
+    }
+
+    void chase()
+    {
+        agent.SetDestination(target.transform.position);
     }
 }
