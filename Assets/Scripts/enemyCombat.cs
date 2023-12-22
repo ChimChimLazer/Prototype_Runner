@@ -39,8 +39,10 @@ public class enemyCombat : MonoBehaviour
 
     private Vector3 point;
 
+    private bool canSeePlayer;
     private bool playerDetected;
-
+    private float detectionTimer;
+    public float detectionSpeed;
 
     private NavMeshAgent agent;
     private float agentDisableTimer;
@@ -55,41 +57,16 @@ public class enemyCombat : MonoBehaviour
 
         patrolNumber = 0;
         patrolCount = patrolPoints.Length-1;
+        canSeePlayer = false;
     }
 
     void Update()
     {
         orientation.LookAt(target.transform.position);
 
-        RaycastHit hit;
-        if (Physics.Raycast(orientation.position, orientation.forward, out hit)){
-            if(hit.collider.tag == "Player")
-            {
-                playerDetected = true;
-                state = enemyState.attcking;
-            }
-            else
-            {
-                if (playerDetected)
-                {
-                    state = enemyState.chasing;
-                } else
-                {
-                    state = enemyState.idle;
-                }
-                
-            }
-        } else
-        {
-            if (playerDetected)
-            {
-                state = enemyState.chasing;
-            }
-            else
-            {
-                state = enemyState.idle;
-            }
-        }
+        playerDetection();
+
+        setState();
 
         switch (state)
         {
@@ -159,6 +136,26 @@ public class enemyCombat : MonoBehaviour
         }
     }
 
+    void setState()
+    {
+        if (playerDetected)
+        {
+            if (canSeePlayer)
+            {
+                state = enemyState.attcking;
+            }
+            else
+            {
+                state = enemyState.chasing;
+            }
+
+        }
+        else
+        {
+            state = enemyState.idle;
+        }
+    }
+
     void shoot()
     {
         attackReady = 0;
@@ -181,7 +178,43 @@ public class enemyCombat : MonoBehaviour
 
         body.localRotation = Quaternion.Euler(0, 0, 0);
 
-        agentDisableTimer = 0.25f;
+        agentDisableTimer = 0.3f;
         agent.SetDestination(targetPosition);
+    }
+
+    void playerDetection()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(orientation.position, orientation.forward, out hit))
+        {
+            if (hit.collider.tag == "Player")
+            {
+                canSeePlayer = true;
+            }
+            else
+            {
+                canSeePlayer = false;
+            }
+        }
+        else
+        {
+            canSeePlayer = false;
+        }
+
+        if (!playerDetected)
+        {
+            if (canSeePlayer)
+            {
+                detectionTimer += Time.deltaTime;
+
+                if (detectionTimer >= detectionSpeed)
+                {
+                    playerDetected = true;
+                }
+            } else
+            {
+                detectionTimer = 0;
+            }
+        }
     }
 }
