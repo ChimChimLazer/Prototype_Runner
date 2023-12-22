@@ -231,11 +231,23 @@ public class playerMovement : MonoBehaviour
     }
     void moveStateHandler()
     {
+        // Checks if players can stand up when crouching
+        RaycastHit hit;
+        bool headBlocked = false;
+        if (moveState == MoveState.crouch || moveState == MoveState.Slide)
+        {
+            headBlocked = 
+                Physics.Raycast(transform.position - transform.right, Vector3.up, out hit, playerHeight - 0.2f) || 
+                Physics.Raycast(transform.position + transform.right, Vector3.up, out hit, playerHeight - 0.2f) ||
+                Physics.Raycast(transform.position - transform.forward, Vector3.up, out hit, playerHeight - 0.2f) ||
+                Physics.Raycast(transform.position + transform.forward, Vector3.up, out hit, playerHeight - 0.2f) ||
+                Physics.Raycast(transform.position, Vector3.up, out hit, playerHeight - 0.2f);
+        }
         if (wallRunning == true)
         {
             moveState = MoveState.wallRunning;
         }
-        else if ((Input.GetKey(KeyCode.LeftControl) || moveState == MoveState.Slide)&& grounded)
+        else if ((Input.GetKey(KeyCode.LeftControl)) || moveState == MoveState.Slide || headBlocked && grounded)
         {
             if (playerSpeed > slideThreshold && slideCooldown >= slideCooldownTime)
             {
