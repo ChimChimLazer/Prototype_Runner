@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -31,6 +32,8 @@ public class enemyCombat : MonoBehaviour
         point,
     }
     public idle idleType;
+    private Vector3 point;
+
     private bool playerDetected;
 
 
@@ -41,6 +44,7 @@ public class enemyCombat : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        point = transform.position;
 
         attackReady = rateOfFire;
     }
@@ -82,16 +86,23 @@ public class enemyCombat : MonoBehaviour
         switch (state)
         {
             case enemyState.idle:
-
-                agent.enabled = false;
-
                 switch (idleType)
                 {
-                    case idle.patrol: 
+                    case idle.idle:
+                        agent.enabled = false;
+                        break;
 
+                    case idle.patrol:
+                        agent.enabled = true;
                         break;
 
                     case idle.point:
+                        
+                        agent.enabled = true;
+
+                        body.localRotation = Quaternion.Euler(0, 0, 0);
+
+                        agent.SetDestination(point);
 
                         break;
                 }
