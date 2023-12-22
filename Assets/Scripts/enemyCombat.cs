@@ -33,7 +33,6 @@ public class enemyCombat : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
 
-        attcking = false;
         attackReady = rateOfFire;
     }
 
