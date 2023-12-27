@@ -8,6 +8,7 @@ TagManager:
   - Boost Pad
   - Weapon
   - Enemy
+  - Death Zone
   layers:
   - Default
   - TransparentFX

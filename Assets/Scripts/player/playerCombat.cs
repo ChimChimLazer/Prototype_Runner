@@ -94,4 +94,12 @@ public class playerCombat : MonoBehaviour
     private void playerDie() {
         Debug.Log("You are dead");
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Death Zone")
+        {
+            playerDie();
+        }
+    }
 }
