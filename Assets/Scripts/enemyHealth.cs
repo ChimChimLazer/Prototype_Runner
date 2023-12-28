@@ -10,6 +10,11 @@ public class enemyHealth : MonoBehaviour
 
     private void Start()
     {
+        maxHeal();
+    }
+
+    public void maxHeal()
+    {
         health = maxHealth;
     }
 

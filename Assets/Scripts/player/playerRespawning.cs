@@ -7,7 +7,7 @@ public class playerRespawning : MonoBehaviour
     public GameObject player;
     public Vector3 spawnPoint;
 
-    private bool alive;
+    public bool alive;
 
     private void Start()
     {
@@ -26,7 +26,6 @@ public class playerRespawning : MonoBehaviour
     public void die()
     {
         alive = false;
-        print(alive);
     }
 
     public void respawn()
@@ -34,6 +33,15 @@ public class playerRespawning : MonoBehaviour
         alive = true;
         player.SetActive(true);
         player.transform.position = spawnPoint;
+
+        // https://forum.unity.com/threads/remove-all-force-innertia-from-a-rigidbody.25026/
+        // http://unity3d.com/support/documentation/ScriptReference/Rigidbody-velocity.html
+
+        // Sets players velocity to 0 when respawning
+        Rigidbody playerRb = player.GetComponent<Rigidbody>();
+
+        playerRb.velocity = Vector3.zero;
+        playerRb.angularVelocity = Vector3.zero;
     }
 
 }
