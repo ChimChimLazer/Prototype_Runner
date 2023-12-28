@@ -104,6 +104,10 @@ public class playerCombat : MonoBehaviour
     {
         if (collision.gameObject.tag == "Death Zone")
         {
+            if(CurrentWeapon != null)
+            {
+                CurrentWeapon.DropWeapon();
+            }
             playerDie();
         }
     }
