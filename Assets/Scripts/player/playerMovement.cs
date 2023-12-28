@@ -350,6 +350,11 @@ public class playerMovement : MonoBehaviour
 
             runningOnWall = collision.gameObject;
             startWallRun();
+
+        } else if (collision.gameObject.tag == "CheckPoint")
+        {
+            playerRespawning respawn = gameObject.GetComponentInParent<playerRespawning>();
+            respawn.spawnPoint = collision.transform.position + new Vector3(0,1,0);
         }
     }
 
