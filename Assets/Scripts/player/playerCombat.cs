@@ -93,6 +93,11 @@ public class playerCombat : MonoBehaviour
 
     private void playerDie() {
         Debug.Log("You are dead");
+
+        playerRespawning respawningScript = gameObject.GetComponentInParent<playerRespawning>();
+        respawningScript.die();
+
+        gameObject.gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision collision)
