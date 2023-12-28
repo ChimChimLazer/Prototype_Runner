@@ -23,11 +23,6 @@ public class playerRespawning : MonoBehaviour
         }
     }
 
-    public void die()
-    {
-        alive = false;
-    }
-
     public void respawn()
     {
         alive = true;

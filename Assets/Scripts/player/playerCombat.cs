@@ -92,22 +92,25 @@ public class playerCombat : MonoBehaviour
     }
 
     private void playerDie() {
-        Debug.Log("You are dead");
 
+        // drop weapon if player has one
+        if (CurrentWeapon != null)
+        {
+            CurrentWeapon.DropWeapon();
+        }
+
+        // Readys Respawn Script
         playerRespawning respawningScript = gameObject.GetComponentInParent<playerRespawning>();
-        respawningScript.die();
+        respawningScript.alive = false;
 
-        gameObject.gameObject.SetActive(false);
+        // Deactives player
+        gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Death Zone")
         {
-            if(CurrentWeapon != null)
-            {
-                CurrentWeapon.DropWeapon();
-            }
             playerDie();
         }
     }
