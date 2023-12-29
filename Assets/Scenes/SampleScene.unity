@@ -1471,9 +1471,12 @@ MonoBehaviour:
   gun: {fileID: 112596319}
   muzzle: {fileID: 1892060662}
   bulletPrefab: {fileID: 4117082160209935669, guid: a57d28a4593ede5449fb9376b517a45e, type: 3}
-  target: {fileID: 1330730720}
-  idleType: 2
-  patrolPoints: []
+  target: {fileID: 0}
+  idleType: 1
+  patrolPoints:
+  - {fileID: 2124171610}
+  - {fileID: 808499967}
+  - {fileID: 284126876}
   detectionSpeed: 0.25
   detectionCoolOffTime: 8
 --- !u!114 &361338400
