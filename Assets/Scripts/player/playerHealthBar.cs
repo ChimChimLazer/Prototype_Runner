@@ -37,15 +37,19 @@ public class playerHealthBar : MonoBehaviour
     private void healthBarTransperency()
     {
         float targetTrans;
+        float newTrans;
         if (healthBar.value < 100)
         {
             targetTrans = 0.9f;
+            newTrans = Mathf.Lerp(barColor.a, targetTrans, Time.deltaTime * 20);
         }
         else
         {
             targetTrans = 0;
+            newTrans = Mathf.Lerp(barColor.a, targetTrans, Time.deltaTime * 5);
         }
-        barColor.a = targetTrans;
+        
+        barColor.a = newTrans;
         bar.color = barColor;
     }
 }

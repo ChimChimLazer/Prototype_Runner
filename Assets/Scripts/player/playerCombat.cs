@@ -34,6 +34,10 @@ public class playerCombat : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            removeHealth(5);
+        }
         healthRegeneration();
         itemPickUp();
     }
