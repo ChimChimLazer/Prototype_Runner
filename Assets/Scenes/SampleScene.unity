@@ -8889,6 +8889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1406991296}
+  healthBar: {fileID: 1388754304}
   spawnPoint: {x: 0, y: 0, z: 0}
   alive: 0
 --- !u!4 &1330730723
@@ -9221,6 +9222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aeb3c825b4879f4789bd9a87ad22a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1330730722}
 --- !u!1 &1392185749
 GameObject:
   m_ObjectHideFlags: 0
@@ -9353,6 +9355,7 @@ MonoBehaviour:
   interactionDistance: 4
   CurrentWeapon: {fileID: 0}
   playerCameraRotation: {fileID: 563273042}
+  healthBar: {fileID: 1388754307}
 --- !u!114 &1406991298
 MonoBehaviour:
   m_ObjectHideFlags: 0

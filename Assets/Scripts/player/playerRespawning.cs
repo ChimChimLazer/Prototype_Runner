@@ -5,6 +5,8 @@ using UnityEngine;
 public class playerRespawning : MonoBehaviour
 {
     public GameObject player;
+    public GameObject healthBar;
+
     public Vector3 spawnPoint;
 
     public bool alive;
@@ -26,6 +28,7 @@ public class playerRespawning : MonoBehaviour
     public void respawn()
     {
         alive = true;
+        healthBar.SetActive(true);
         player.SetActive(true);
         player.transform.position = spawnPoint;
 
