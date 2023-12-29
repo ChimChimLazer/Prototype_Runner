@@ -240,5 +240,10 @@ public class enemyCombat : MonoBehaviour
                 detectionCoolOff = 0;
             }
         }
+
+        if (!target.activeSelf)
+        {
+            playerDetected = false;
+        }
     }
 }
