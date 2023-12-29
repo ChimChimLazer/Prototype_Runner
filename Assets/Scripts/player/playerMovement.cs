@@ -87,6 +87,8 @@ public class playerMovement : MonoBehaviour
     public static float playerFOV;
     public float FOV;
 
+    private int currentCheckpoint;
+
     [Header("References")]
     public Rigidbody rb;
     public Transform playerCamera;
@@ -100,6 +102,7 @@ public class playerMovement : MonoBehaviour
         playerFOV = FOV;
         jumpBufferTimer = 0;
 
+        currentCheckpoint = 0;
         jumpPadCheck = 0;
         OldGrounded = grounded;
         OldWallRunning = wallRunning;
@@ -353,8 +356,15 @@ public class playerMovement : MonoBehaviour
 
         } else if (collision.gameObject.tag == "CheckPoint")
         {
-            playerRespawning respawn = gameObject.GetComponentInParent<playerRespawning>();
-            respawn.spawnPoint = collision.transform.position + new Vector3(0,1,0);
+            
+            checkpointFX checkpoint = collision.gameObject.GetComponent<checkpointFX>();
+
+            if (checkpoint.checkpointNumber > currentCheckpoint)
+            {
+                currentCheckpoint = checkpoint.checkpointNumber;
+                playerRespawning respawn = gameObject.GetComponentInParent<playerRespawning>();
+                respawn.spawnPoint = collision.transform.position + new Vector3(0, 1, 0);
+            }
         }
     }
 
