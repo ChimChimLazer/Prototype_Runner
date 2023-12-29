@@ -362,6 +362,7 @@ public class playerMovement : MonoBehaviour
             if (checkpoint.checkpointNumber > currentCheckpoint)
             {
                 currentCheckpoint = checkpoint.checkpointNumber;
+                checkpoint.activeLight();
                 playerRespawning respawn = gameObject.GetComponentInParent<playerRespawning>();
                 respawn.spawnPoint = collision.transform.position + new Vector3(0, 1, 0);
             }
