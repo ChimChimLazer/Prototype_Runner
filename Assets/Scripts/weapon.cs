@@ -15,6 +15,9 @@ public class weapon : MonoBehaviour
 
     private float bulletReady;
 
+    private Vector3 Spawnpoint;
+    private Quaternion Spawnrotation;
+
     [Header("Misc Stats")]
     public Vector3 positionOffset;
     public Transform muzzle;
@@ -27,6 +30,9 @@ public class weapon : MonoBehaviour
 
     private void Start()
     {
+        Spawnpoint = transform.position;
+        Spawnrotation = transform.rotation;
+
         bulletReady = rateOfFire;
     }
 
@@ -122,5 +128,19 @@ public class weapon : MonoBehaviour
         }
 
         Destroy(trail.gameObject, trail.time);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Death Zone")
+        {
+            // Respawns gun if dropped in a dealth zone
+            transform.position = Spawnpoint;
+            transform.rotation = Spawnrotation;
+
+            // Remove previously applied velocity 
+            rb.velocity = Vector3.zero; 
+            rb.angularVelocity = Vector3.zero;
+        }
     }
 }
