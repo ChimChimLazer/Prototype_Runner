@@ -23,6 +23,7 @@ public class playerCombat : MonoBehaviour
 
     [Header("References")]
     public Transform playerCameraRotation;
+    public playerHealthBar healthBar;
 
     void Start()
     {
@@ -56,7 +57,9 @@ public class playerCombat : MonoBehaviour
             if (playerHealth > maxHealth)
             {
                 playerHealth = maxHealth;
+                
             }
+            healthBar.setHealth(playerHealth);
         }
         lastFrameHealth = playerHealth;
     }
@@ -84,6 +87,7 @@ public class playerCombat : MonoBehaviour
     public void removeHealth(float damage)
     {
         playerHealth -= damage;
+        healthBar.setHealth(playerHealth);
 
         if (playerHealth <= 0) 
         {
