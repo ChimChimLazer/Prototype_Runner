@@ -27,7 +27,7 @@ public class playerCombat : MonoBehaviour
 
     void Start()
     {
-        playerHealth = maxHealth;
+        maxHeal();
         lastFrameHealth = playerHealth;
         regenerationCoolDown = regenerationCoolDownTime;
     }
@@ -41,6 +41,12 @@ public class playerCombat : MonoBehaviour
         healthRegeneration();
         itemPickUp();
     }
+
+    public void maxHeal()
+    {
+        playerHealth = maxHealth;
+    }
+
     void healthRegeneration()
     {
         // When player loses health

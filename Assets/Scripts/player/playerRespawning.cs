@@ -10,10 +10,12 @@ public class playerRespawning : MonoBehaviour
     public Vector3 spawnPoint;
 
     public bool alive;
+    private playerCombat playerCombatScript;
 
     private void Start()
     {
         spawnPoint = player.transform.position;
+        playerCombatScript = player.GetComponent<playerCombat>();
         alive = true;
     }
 
@@ -31,6 +33,7 @@ public class playerRespawning : MonoBehaviour
         healthBar.SetActive(true);
         player.SetActive(true);
         player.transform.position = spawnPoint;
+        playerCombatScript.maxHeal();
 
         // https://forum.unity.com/threads/remove-all-force-innertia-from-a-rigidbody.25026/
         // http://unity3d.com/support/documentation/ScriptReference/Rigidbody-velocity.html
