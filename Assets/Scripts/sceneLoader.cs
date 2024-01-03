@@ -31,8 +31,17 @@ public class sceneLoader : MonoBehaviour
 
     void loadNextScene()
     {
-        string nextScene = scenes[currentScene + 1];
-        SceneManager.LoadScene(nextScene);
+        int nextSceneNumber = currentScene + 1;
+
+        if (nextSceneNumber < scenes.Length)
+        {
+            string nextScene = scenes[nextSceneNumber];
+            SceneManager.LoadScene(nextScene);
+
+        } else
+        {
+            Debug.Log("No more Scenes");
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
