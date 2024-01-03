@@ -33,7 +33,6 @@ public class sceneLoader : MonoBehaviour
     {
         string nextScene = scenes[currentScene + 1];
         SceneManager.LoadScene(nextScene);
-
     }
 
     private void OnCollisionEnter(Collision collision)
