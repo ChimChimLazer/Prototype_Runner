@@ -13,7 +13,6 @@ public class sceneLoader : MonoBehaviour
     void Start()
     {
         currentScene = getCurrentSceneNum(SceneManager.GetActiveScene().name);
-        Debug.Log(currentScene);
     }
 
     int getCurrentSceneNum(string sceneName)
@@ -28,5 +27,19 @@ public class sceneLoader : MonoBehaviour
             x++;
         }
         return -1;
+    }
+
+    void loadNextScene()
+    {
+        int nextScene = currentScene += 1;
+        Debug.Log(nextScene);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            loadNextScene();
+        }
     }
 }
