@@ -31,8 +31,9 @@ public class sceneLoader : MonoBehaviour
 
     void loadNextScene()
     {
-        int nextScene = currentScene + 1;
-        Debug.Log(nextScene);
+        string nextScene = scenes[currentScene + 1];
+        SceneManager.LoadScene(nextScene);
+
     }
 
     private void OnCollisionEnter(Collision collision)
