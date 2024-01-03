@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 238444665}
   - component: {fileID: 238444666}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: Testing Gun
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -483,8 +483,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: Test Weapon
-  rateOfFire: 0.15
-  damage: 20
+  rateOfFire: 0.2
+  damage: 1000
   fullAuto: 1
   positionOffset: {x: 0.6, y: -0.25, z: 0.5}
   muzzle: {fileID: 1079665253}
