@@ -463,6 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1212417511327162458}
   healthBar: {fileID: 0}
+  playerCam: {fileID: 7128317923370675795}
   spawnPoint: {x: 0, y: 0, z: 0}
   alive: 1
 --- !u!1 &7128317923370675795

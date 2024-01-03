@@ -6,8 +6,10 @@ public class playerRespawning : MonoBehaviour
 {
     public GameObject player;
     public GameObject healthBar;
+    public GameObject playerCam;
 
     public Vector3 spawnPoint;
+    public Quaternion spawnRotation;
 
     public bool alive;
     private playerCombat playerCombatScript;
@@ -15,6 +17,8 @@ public class playerRespawning : MonoBehaviour
     private void Start()
     {
         spawnPoint = player.transform.position;
+        spawnRotation = Quaternion.Euler(0, 0, 0);
+
         playerCombatScript = player.GetComponent<playerCombat>();
         alive = true;
     }
@@ -43,6 +47,8 @@ public class playerRespawning : MonoBehaviour
 
         playerRb.velocity = Vector3.zero;
         playerRb.angularVelocity = Vector3.zero;
+
+        playerCam.transform.rotation = spawnRotation;
     }
 
 }
