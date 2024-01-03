@@ -31,7 +31,7 @@ public class sceneLoader : MonoBehaviour
 
     void loadNextScene()
     {
-        int nextScene = currentScene += 1;
+        int nextScene = currentScene + 1;
         Debug.Log(nextScene);
     }
 
