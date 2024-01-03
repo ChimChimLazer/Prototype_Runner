@@ -226,6 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scenes:
+  - Level 0
   - SampleScene
   - Level Template
 --- !u!1 &5785798456393618865
