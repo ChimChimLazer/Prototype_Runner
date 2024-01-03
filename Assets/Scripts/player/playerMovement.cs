@@ -365,7 +365,7 @@ public class playerMovement : MonoBehaviour
                 checkpoint.activeLight();
                 playerRespawning respawn = gameObject.GetComponentInParent<playerRespawning>();
                 respawn.spawnPoint = collision.transform.position + new Vector3(0, 1, 0);
-                respawn.spawnRotation = collision.transform.rotation;
+                respawn.spawnRotation = Quaternion.Euler(0, collision.transform.localRotation.eulerAngles.y, 0);
             }
         }
     }
