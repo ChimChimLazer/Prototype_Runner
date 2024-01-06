@@ -43,6 +43,12 @@ public class door : MonoBehaviour
         }
     }
 
+    void open()
+    {
+        doorOpen = true;
+        Debug.Log("Door is open");
+    }
+
     bool checkDefeatedEnemys()
     {
         foreach (GameObject enemy in conditionItems)
@@ -55,9 +61,5 @@ public class door : MonoBehaviour
         return true;
     }
 
-    void open()
-    {
-        doorOpen = true;
-        Debug.Log("Door is open");
-    }
+    
 }
