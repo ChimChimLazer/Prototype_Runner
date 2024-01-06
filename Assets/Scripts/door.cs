@@ -7,6 +7,7 @@ public class door : MonoBehaviour
     public enum condition
     {
         ButtonPressed,
+        ButtonHeld,
         DefeatedEnemys,
     }
     [Header("Condition")]
@@ -32,6 +33,8 @@ public class door : MonoBehaviour
             switch (OpenCondition)
             {
                 case condition.ButtonPressed:
+                    break;
+                case condition.ButtonHeld:
                     break;
                 case condition.DefeatedEnemys:
                     if (checkDefeatedEnemys())
@@ -60,6 +63,4 @@ public class door : MonoBehaviour
         }
         return true;
     }
-
-    
 }
