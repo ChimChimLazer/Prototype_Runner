@@ -13,15 +13,14 @@ public class door : MonoBehaviour
     public condition OpenCondition;
     public GameObject[] conditionItems;
 
-    [Header("Position")]
+    [Header("Opening")]
     public Vector3 openPosition;
-    private Vector3 closedPosition;
+    public float openingTime;
 
     private bool doorOpen;
 
     void Start()
     {
-        closedPosition = transform.position;
         doorOpen = false;
     }
 
@@ -51,7 +50,7 @@ public class door : MonoBehaviour
     void open()
     {
         doorOpen = true;
-        Debug.Log("Door is open");
+        LeanTween.move(gameObject, openPosition, openingTime);
     }
 
     bool checkDefeatedEnemys()

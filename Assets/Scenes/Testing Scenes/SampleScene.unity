@@ -2949,7 +2949,8 @@ MonoBehaviour:
   OpenCondition: 0
   conditionItems:
   - {fileID: 836172329}
-  openPosition: {x: 0, y: 0, z: 0}
+  openPosition: {x: 8, y: 4, z: 15}
+  openingTime: 0.5
 --- !u!65 &1788346378
 BoxCollider:
   m_ObjectHideFlags: 0
