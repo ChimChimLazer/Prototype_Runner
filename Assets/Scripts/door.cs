@@ -17,11 +17,13 @@ public class door : MonoBehaviour
     public Vector3 openPosition;
     public float openingTime;
 
+    private Vector3 closedPosition;
     private bool doorOpen;
 
     void Start()
     {
         doorOpen = false;
+        closedPosition = transform.position;
     }
 
     void Update()
@@ -51,6 +53,12 @@ public class door : MonoBehaviour
     {
         doorOpen = true;
         LeanTween.move(gameObject, openPosition, openingTime);
+    }
+
+    void close()
+    {
+        doorOpen = false;
+        LeanTween.move(gameObject, closedPosition, openingTime);
     }
 
     bool checkDefeatedEnemys()
