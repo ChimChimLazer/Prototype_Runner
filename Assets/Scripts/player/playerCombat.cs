@@ -34,12 +34,13 @@ public class playerCombat : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            removeHealth(5);
-        }
         healthRegeneration();
         itemPickUp();
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            interact();
+        }
     }
 
     public void maxHeal()
@@ -91,6 +92,22 @@ public class playerCombat : MonoBehaviour
         } else if (Input.GetKeyDown(KeyCode.Q) && CurrentWeapon != null)
         {
             CurrentWeapon.DropWeapon();
+        }
+    }
+
+    void interact()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(playerCameraRotation.position, playerCameraRotation.forward, out hit, interactionDistance))
+        {
+            if(hit.collider.tag == "Interactable Button")
+            {
+                interactableButton button = hit.collider.GetComponentInParent<interactableButton>();
+                if (!button.pressed)
+                {
+                    button.press();
+                }
+            }
         }
     }
 

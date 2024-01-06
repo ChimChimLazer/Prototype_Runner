@@ -228,11 +228,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &59703492 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8561644837799369059, guid: 444843b81f80559408fbe5c782b0e870, type: 3}
-  m_PrefabInstance: {fileID: 6844767154876001891}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &153985773
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,6 +1129,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 836172330}
+  - component: {fileID: 836172331}
   m_Layer: 0
   m_Name: Interactable Button
   m_TagString: Untagged
@@ -1159,6 +1155,20 @@ Transform:
   - {fileID: 1711892235}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &836172331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 836172329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29be4f915f5d78d4bb305b6678a6f1b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pressed: 1
+  pressedDepth: {x: 0, y: 0, z: 0}
 --- !u!1 &936456029
 GameObject:
   m_ObjectHideFlags: 0
@@ -2813,7 +2823,7 @@ GameObject:
   - component: {fileID: 1711892236}
   m_Layer: 0
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: Interactable Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2913,10 +2923,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1788346381}
+  - component: {fileID: 1788346377}
   - component: {fileID: 1788346380}
   - component: {fileID: 1788346379}
   - component: {fileID: 1788346378}
-  - component: {fileID: 1788346377}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -2936,10 +2946,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f6eab012405b25499bade2c90dcb608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OpenCondition: 1
+  OpenCondition: 0
   conditionItems:
-  - {fileID: 59703492}
-  - {fileID: 936456029}
+  - {fileID: 836172329}
   openPosition: {x: 0, y: 0, z: 0}
 --- !u!65 &1788346378
 BoxCollider:

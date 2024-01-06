@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Death Zone
   - CheckPoint
+  - Interactable Button
   layers:
   - Default
   - TransparentFX

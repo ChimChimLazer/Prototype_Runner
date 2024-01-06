@@ -6,8 +6,7 @@ public class door : MonoBehaviour
 {
     public enum condition
     {
-        ButtonPressed,
-        ButtonHeld,
+        ButtonInteractable,
         DefeatedEnemys,
     }
     [Header("Condition")]
@@ -32,10 +31,13 @@ public class door : MonoBehaviour
         {
             switch (OpenCondition)
             {
-                case condition.ButtonPressed:
+                case condition.ButtonInteractable:
+                    if (checkButtonInteractable())
+                    {
+                        open();
+                    }
                     break;
-                case condition.ButtonHeld:
-                    break;
+
                 case condition.DefeatedEnemys:
                     if (checkDefeatedEnemys())
                     {
@@ -57,6 +59,19 @@ public class door : MonoBehaviour
         foreach (GameObject enemy in conditionItems)
         {
             if (enemy != null)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool checkButtonInteractable()
+    {
+        foreach(GameObject button in conditionItems)
+        {
+            interactableButton buttonInfo = button.GetComponent<interactableButton>();
+            if (!buttonInfo.pressed)
             {
                 return false;
             }
