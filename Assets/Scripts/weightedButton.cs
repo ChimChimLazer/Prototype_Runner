@@ -10,4 +10,14 @@ public class weightedButton : MonoBehaviour
     {
         pressed = false;
     }
+
+    void OnCollisionStay(Collision collision)
+    {
+        pressed = true;
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        pressed = false;
+    }
 }
