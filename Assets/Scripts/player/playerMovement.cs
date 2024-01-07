@@ -93,6 +93,7 @@ public class playerMovement : MonoBehaviour
     public Rigidbody rb;
     public Transform playerCamera;
     private GameObject runningOnWall;
+    public gameGUI GUI;
 
     void Start()
     {
@@ -405,6 +406,10 @@ public class playerMovement : MonoBehaviour
         if (trigger.gameObject.tag == "Boost Pad")
         {
             playerFOV = FOV;
+        }
+        if (trigger.gameObject.tag == "Timer Start")
+        {
+            GUI.startTimer();
         }
     }
 

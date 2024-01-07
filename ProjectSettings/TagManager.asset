@@ -12,6 +12,7 @@ TagManager:
   - CheckPoint
   - Interactable Button
   - Weighted Button
+  - Timer Start
   layers:
   - Default
   - TransparentFX
