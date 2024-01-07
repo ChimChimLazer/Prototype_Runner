@@ -7,6 +7,7 @@ public class door : MonoBehaviour
     public enum condition
     {
         ButtonInteractable,
+        WeightedButton,
         DefeatedEnemys,
     }
     [Header("Condition")]
@@ -39,12 +40,28 @@ public class door : MonoBehaviour
                     }
                     break;
 
+                case condition.WeightedButton:
+                    if (checkButtonWeighted())
+                    {
+                        open();
+                    }
+                    break;
+
                 case condition.DefeatedEnemys:
                     if (checkDefeatedEnemys())
                     {
                         open();
                     }
                     break;
+            }
+        }  else
+        {
+            if (OpenCondition == condition.WeightedButton)
+            {
+                if (!checkButtonWeighted())
+                {
+                    close();
+                }
             }
         }
     }
@@ -61,11 +78,12 @@ public class door : MonoBehaviour
         LeanTween.move(gameObject, closedPosition, openingTime);
     }
 
-    bool checkDefeatedEnemys()
+    bool checkButtonInteractable()
     {
-        foreach (GameObject enemy in conditionItems)
+        foreach (GameObject button in conditionItems)
         {
-            if (enemy != null)
+            interactableButton buttonInfo = button.GetComponent<interactableButton>();
+            if (!buttonInfo.pressed)
             {
                 return false;
             }
@@ -73,12 +91,23 @@ public class door : MonoBehaviour
         return true;
     }
 
-    bool checkButtonInteractable()
+    bool checkButtonWeighted()
     {
-        foreach(GameObject button in conditionItems)
+        foreach (GameObject button in conditionItems)
         {
-            interactableButton buttonInfo = button.GetComponent<interactableButton>();
-            if (!buttonInfo.pressed)
+            if (!button.GetComponentInChildren<weightedButton>().pressed)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool checkDefeatedEnemys()
+    {
+        foreach (GameObject enemy in conditionItems)
+        {
+            if (enemy != null)
             {
                 return false;
             }

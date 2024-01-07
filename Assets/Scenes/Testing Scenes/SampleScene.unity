@@ -3184,11 +3184,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f6eab012405b25499bade2c90dcb608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OpenCondition: 0
+  OpenCondition: 1
   conditionItems:
-  - {fileID: 836172329}
+  - {fileID: 1846133067}
   openPosition: {x: 8, y: 4, z: 15}
-  openingTime: 0.5
+  openingTime: 0.25
 --- !u!65 &1788346378
 BoxCollider:
   m_ObjectHideFlags: 0
