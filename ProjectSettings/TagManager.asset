@@ -11,6 +11,7 @@ TagManager:
   - Death Zone
   - CheckPoint
   - Interactable Button
+  - Weighted Button
   layers:
   - Default
   - TransparentFX
