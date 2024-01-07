@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static System.Net.WebRequestMethods;
 
 public class gameGUI : MonoBehaviour
 {
@@ -22,7 +23,8 @@ public class gameGUI : MonoBehaviour
         if (timerStarted)
         {
             timer += Time.deltaTime;
-            gameTimer.text = timer.ToString();
+            timerText = convertTimeToText(timer);
+            gameTimer.text = timerText;
         }
     }
 
@@ -33,6 +35,19 @@ public class gameGUI : MonoBehaviour
 
     private string convertTimeToText(float time)
     {
-        return "";
+        int milliseconds = Mathf.RoundToInt((timer % 1) * 1000);
+        if (milliseconds > 999)
+        {
+            milliseconds = 0;
+        }
+        int seconds = Mathf.RoundToInt((time - milliseconds / 1000) % 60);
+        if (seconds > 59)
+        {
+            seconds = 0;
+        }
+        int minutes = Mathf.RoundToInt((time - milliseconds / 1000 - seconds) / 60);
+
+        // https://learn.microsoft.com/en-us/dotnet/standard/base-types/how-to-pad-a-number-with-leading-zeros?redirectedfrom=MSDN
+        return (minutes + ":" + seconds.ToString("D2") + ":" + milliseconds.ToString("D3"));
     }
 }
