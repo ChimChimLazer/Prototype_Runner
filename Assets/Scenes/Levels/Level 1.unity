@@ -3287,6 +3287,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2490247042994368370, guid: e0dc76f5dbfd44b4aa53288ad12b6dc2, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2490247042994368370, guid: e0dc76f5dbfd44b4aa53288ad12b6dc2, type: 3}
       propertyPath: m_Name
       value: Level Finsh Screen
       objectReference: {fileID: 0}

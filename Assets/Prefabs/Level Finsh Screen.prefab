@@ -386,6 +386,7 @@ MonoBehaviour:
   loader: {fileID: 0}
   timeText: {fileID: 380305921189379675}
   highscoreText: {fileID: 4777817608228591851}
+  levelNameText: {fileID: 6479690948176324380}
 --- !u!1 &2882296304220504555
 GameObject:
   m_ObjectHideFlags: 0
@@ -643,7 +644,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4705779929334715441}
         m_TargetAssemblyTypeName: levelFinishUI, Assembly-CSharp
-        m_MethodName: nextLevelButton
+        m_MethodName: mainMenuButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

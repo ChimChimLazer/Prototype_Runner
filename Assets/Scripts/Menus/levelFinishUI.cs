@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class levelFinishUI : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class levelFinishUI : MonoBehaviour
     [Header("Internal Fields")]
     [SerializeField] TextMeshProUGUI timeText;
     [SerializeField] TextMeshProUGUI highscoreText;
+    [SerializeField] TextMeshProUGUI levelNameText;
 
     private gameGUI GUI;
 
@@ -17,6 +19,8 @@ public class levelFinishUI : MonoBehaviour
     {
         GUI = loader.GUI;
 
+        // Update text
+        levelNameText.text = SceneManager.GetActiveScene().name;
         timeText.text = ("Time : " + GUI.timerText);
         highscoreText.text = ("Highscore : " + GUI.highscoreText);
     }
@@ -29,5 +33,10 @@ public class levelFinishUI : MonoBehaviour
     public void nextLevelButton()
     {
         loader.loadNextScene();
+    }
+
+    public void mainMenuButton() 
+    {
+        Debug.Log("Main Menu");
     }
 }
