@@ -384,6 +384,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loader: {fileID: 0}
+  timeText: {fileID: 4466171286932089476}
+  highscoreText: {fileID: 3048830787666504427}
 --- !u!1 &4457346199692736140
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class sceneLoader : MonoBehaviour
 {
     public string[] scenes;
     public GameObject levelFinishMenuPrefab;
+    public gameGUI GUI;
 
     private int currentScene;
     private bool levelFinished;
