@@ -95,7 +95,7 @@ MonoBehaviour:
   wallRunGrabForce: 18
   wallRunRotationAmount: 9
   jumpPadForce: 40
-  boostPadForce: 50
+  boostPadForce: 90
   boostFOV: 80
   playerHeight: 1.1
   playerWidth: 0.9
