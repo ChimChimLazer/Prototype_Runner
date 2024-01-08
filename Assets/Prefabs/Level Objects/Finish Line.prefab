@@ -231,6 +231,7 @@ MonoBehaviour:
   - Level 3
   - Level 4
   - Level 5
+  levelFinishMenuPrefab: {fileID: 3794389507191500458, guid: e0dc76f5dbfd44b4aa53288ad12b6dc2, type: 3}
 --- !u!1 &5785798456393618865
 GameObject:
   m_ObjectHideFlags: 0

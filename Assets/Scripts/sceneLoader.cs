@@ -7,12 +7,15 @@ using UnityEngine.SceneManagement;
 public class sceneLoader : MonoBehaviour
 {
     public string[] scenes;
+    public GameObject levelFinishMenuPrefab;
 
     private int currentScene;
+    private bool levelFinished;
 
     void Start()
     {
         currentScene = getCurrentSceneNum(SceneManager.GetActiveScene().name);
+        levelFinished = false;
     }
 
     int getCurrentSceneNum(string sceneName)
@@ -29,7 +32,7 @@ public class sceneLoader : MonoBehaviour
         return -1;
     }
 
-    void loadNextScene()
+    public void loadNextScene()
     {
         int nextSceneNumber = currentScene + 1;
 
@@ -44,11 +47,23 @@ public class sceneLoader : MonoBehaviour
         }
     }
 
+    public void restartScene()
+    {
+        SceneManager.LoadScene(currentScene);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            loadNextScene();
+            if (!levelFinished)
+            {
+                levelFinished = true;
+                Cursor.lockState = CursorLockMode.Confined; Cursor.visible = true;
+                GameObject levelFinishMenu = Instantiate(levelFinishMenuPrefab);
+                levelFinishUI levelFinish = levelFinishMenu.GetComponent<levelFinishUI>();
+                levelFinish.loader = this;
+            }
         }
     }
 }
