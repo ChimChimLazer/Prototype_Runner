@@ -94,7 +94,7 @@ MonoBehaviour:
   wallRunMomentum: 30
   wallRunGrabForce: 18
   wallRunRotationAmount: 9
-  jumpPadForce: 25
+  jumpPadForce: 40
   boostPadForce: 50
   boostFOV: 80
   playerHeight: 1.1
@@ -102,6 +102,7 @@ MonoBehaviour:
   FOV: 60
   rb: {fileID: 756729027106299056}
   playerCamera: {fileID: 5731620631155891765}
+  GUI: {fileID: 0}
 --- !u!114 &1008149557254617085
 MonoBehaviour:
   m_ObjectHideFlags: 0
