@@ -18,6 +18,7 @@ public class levelFinishUI : MonoBehaviour
         GUI = loader.GUI;
 
         timeText.text = ("Time : " + GUI.timerText);
+        highscoreText.text = ("Highscore : " + GUI.highscoreText);
     }
 
     public void restartLevelButton()

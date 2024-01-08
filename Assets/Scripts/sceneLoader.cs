@@ -59,6 +59,7 @@ public class sceneLoader : MonoBehaviour
         {
             if (!levelFinished)
             {
+                GUI.stopTimer();
                 levelFinished = true;
                 Cursor.lockState = CursorLockMode.Confined; Cursor.visible = true;
                 GameObject levelFinishMenu = Instantiate(levelFinishMenuPrefab);
