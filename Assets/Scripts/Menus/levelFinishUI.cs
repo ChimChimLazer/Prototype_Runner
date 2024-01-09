@@ -23,6 +23,8 @@ public class levelFinishUI : MonoBehaviour
         levelNameText.text = SceneManager.GetActiveScene().name;
         timeText.text = ("Time : " + GUI.timerText);
         highscoreText.text = ("Highscore : " + GUI.highscoreText);
+
+        Time.timeScale = 0;
     }
 
     public void restartLevelButton()

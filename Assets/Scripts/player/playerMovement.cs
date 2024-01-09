@@ -102,6 +102,7 @@ public class playerMovement : MonoBehaviour
         slideCooldown = slideCooldownTime;
         playerFOV = FOV;
         jumpBufferTimer = 0;
+        Time.timeScale = 1;
 
         currentCheckpoint = 0;
         jumpPadCheck = 0;
