@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Slider = UnityEngine.UI.Slider;
+using Toggle = UnityEngine.UI.Toggle;
 
 public class SettingsMenu : MonoBehaviour
 {
@@ -15,20 +16,27 @@ public class SettingsMenu : MonoBehaviour
     private float SensX;
     private float SensY;
 
-    private bool invertX;
-    private bool invertY;
-
-    private float FOV;
+    private int FOV;
 
 
+    // X Sensitivity 
     public GameObject SensXObject;
     private Slider SensXSlider;
     private TextMeshProUGUI SensXTextBox;
 
+    // Y Sensitivity 
     public GameObject SensYObject;
     private Slider SensYSlider;
     private TextMeshProUGUI SensYTextBox;
 
+    // Invert Sensitivity
+    public Toggle InvertXToggle;
+    public Toggle InvertYToggle;
+
+    // FOV
+    public GameObject FOVObject;
+    private Slider FOVSlider;
+    private TextMeshProUGUI FOVTextBox;
 
     private void Start()
     {
@@ -36,6 +44,9 @@ public class SettingsMenu : MonoBehaviour
         SensXTextBox = SensXObject.GetComponentInChildren<TextMeshProUGUI>();
         SensYSlider = SensYObject.GetComponentInChildren<Slider>();
         SensYTextBox = SensYObject.GetComponentInChildren<TextMeshProUGUI>();
+
+        FOVSlider = FOVObject.GetComponentInChildren<Slider>();
+        FOVTextBox = FOVObject.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     public void updateSenx()
@@ -50,14 +61,14 @@ public class SettingsMenu : MonoBehaviour
         SensYTextBox.text = "Vertical Sensitivity\n" + (MathF.Round(SensY * 10) / 10);
     }
 
+    public void updateFOV()
+    {
+        FOV = (int)FOVSlider.value;
+        FOVTextBox.text = "Field of View\n" + FOV;
+    }
+
     public void applySettings()
     {
-        Debug.Log(SensX);
-        Debug.Log(SensY);
-
-        Debug.Log(invertX);
-        Debug.Log(invertY);
-
         Debug.Log(FOV);
     }
 
