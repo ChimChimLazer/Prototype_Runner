@@ -38,6 +38,11 @@ public static class SaveSystem
         }
     }
 
+    public static void deleteHighScore()
+    {
+        File.Delete(Application.persistentDataPath + "/highscores.txt");
+    }
+
 
     public static void saveUserSettings(SettingsMenu settings)
     {

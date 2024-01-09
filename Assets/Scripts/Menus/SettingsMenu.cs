@@ -41,6 +41,10 @@ public class SettingsMenu : MonoBehaviour
     private Slider FOVSlider;
     private TextMeshProUGUI FOVTextBox;
 
+    // Wipe Highscore Pop Up
+    public GameObject wipeTextBoxPopUpObject;
+    public LevelElement[] levels;
+
     private void Start()
     {
         SensXSlider = SensXObject.GetComponentInChildren<Slider>();
@@ -99,5 +103,25 @@ public class SettingsMenu : MonoBehaviour
     {
         mainMeu.SetActive(true); 
         gameObject.SetActive(false);
+    }
+
+    public void wipeTextBoxPopUp()
+    {
+        wipeTextBoxPopUpObject.SetActive(true);
+    }
+
+    public void wipeTextBoxNo()
+    {
+        wipeTextBoxPopUpObject.SetActive(false);
+    }
+
+    public void wipeTextBoxYes()
+    {
+        SaveSystem.deleteHighScore();
+        foreach (LevelElement level in levels)
+        {
+            level.updateHighscores();
+        }
+        wipeTextBoxNo();
     }
 }

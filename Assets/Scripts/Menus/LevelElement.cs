@@ -2,40 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static System.Net.WebRequestMethods;
+using UnityEngine.SceneManagement;
 
-public class gameGUI : MonoBehaviour
+public class LevelElement : MonoBehaviour
 {
-    //https://forum.unity.com/threads/changing-textmeshpro-text-from-ui-via-script.462250/
-    public TextMeshProUGUI gameTimer;
-    public float timer;
-    public string timerText;
-    private bool timerStarted;
+    public TextMeshProUGUI Name;
+    public TextMeshProUGUI Highscore;
+    public int levelNumber;
 
-    void Start()
+    private void Start()
     {
-        timer = 0;
-        timerStarted = false;
+        updateHighscores();
     }
 
-    void Update()
+    public void updateHighscores()
     {
-        if (timerStarted)
+        highscoreData data = SaveSystem.loadHighscore();
+        if (data != null)
         {
-            timer += Time.deltaTime;
-            timerText = convertTimeToText(timer);
-            gameTimer.text = timerText;
+            Debug.Log(levelNumber);
+            float highscoreNum = data.highscores[levelNumber];
+            Highscore.text = convertTimeToText(highscoreNum);
+        }
+        else
+        {
+            Highscore.text = "0:00:000";
         }
     }
 
-    public void startTimer()
+    public void OnButtonClick()
     {
-        timerStarted = true;
-    }
-
-    public void stopTimer()
-    {
-        timerStarted = false;
+        SceneManager.LoadScene(Name.text);
     }
 
     public string convertTimeToText(float time)
@@ -51,7 +48,7 @@ public class gameGUI : MonoBehaviour
             seconds = 0;
         }
         int minutes = Mathf.RoundToInt((time - milliseconds / 1000 - seconds) / 60);
-        
+
         // https://learn.microsoft.com/en-us/dotnet/standard/base-types/how-to-pad-a-number-with-leading-zeros?redirectedfrom=MSDN
         return (minutes + ":" + seconds.ToString("D2") + ":" + milliseconds.ToString("D3"));
     }
