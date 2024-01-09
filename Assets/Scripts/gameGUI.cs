@@ -40,7 +40,7 @@ public class gameGUI : MonoBehaviour
 
     public string convertTimeToText(float time)
     {
-        int milliseconds = Mathf.RoundToInt((timer % 1) * 1000);
+        int milliseconds = Mathf.RoundToInt((time % 1) * 1000);
         if (milliseconds > 999)
         {
             milliseconds = 0;
