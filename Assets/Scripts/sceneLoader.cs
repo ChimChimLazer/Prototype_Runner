@@ -25,13 +25,19 @@ public class sceneLoader : MonoBehaviour
     void loadHighscore()
     {
         highscoreData data = SaveSystem.loadHighscore();
-        if (data != null )
+        if (data != null)
         {
             highscores = new float[data.highscores.Length];
-            data.highscores = highscores;
+            int x = 0;
+            foreach (float item in data.highscores)
+            {
+                highscores[x] = item;
+                x++;
+            }
         }
         else
         {
+            Debug.Log("new file created");
             highscores = new float[scenes.Length];
             saveHighscore();
         }
@@ -88,6 +94,7 @@ public class sceneLoader : MonoBehaviour
                 if (GUI.timer < highscores[currentScene] || highscores[currentScene] == 0)
                 {
                     highscores[currentScene] = GUI.timer;
+                    saveHighscore();
                 }
 
                 Cursor.lockState = CursorLockMode.Confined; Cursor.visible = true;
