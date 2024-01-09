@@ -46,6 +46,6 @@ public class levelFinishUI : MonoBehaviour
 
     public void mainMenuButton() 
     {
-        Debug.Log("Main Menu");
+        SceneManager.LoadScene("Main Menu");
     }
 }
