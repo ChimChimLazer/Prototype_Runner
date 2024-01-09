@@ -7,7 +7,7 @@ public class playerCombat : MonoBehaviour
 {
     [Header("Health")]
     public float playerHealth;
-    [SerializeField] float maxHealth;
+    public float maxHealth;
     private float lastFrameHealth;
 
     [Header("Health Regeneration")]

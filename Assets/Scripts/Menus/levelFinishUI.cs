@@ -9,9 +9,9 @@ public class levelFinishUI : MonoBehaviour
     public sceneLoader loader;
 
     [Header("Internal Fields")]
-    [SerializeField] TextMeshProUGUI timeText;
-    [SerializeField] TextMeshProUGUI highscoreText;
-    [SerializeField] TextMeshProUGUI levelNameText;
+    public TextMeshProUGUI timeText;
+    public TextMeshProUGUI highscoreText;
+    public TextMeshProUGUI levelNameText;
 
     private gameGUI GUI;
 

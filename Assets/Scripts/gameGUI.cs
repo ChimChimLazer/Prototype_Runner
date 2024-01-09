@@ -7,7 +7,7 @@ using static System.Net.WebRequestMethods;
 public class gameGUI : MonoBehaviour
 {
     //https://forum.unity.com/threads/changing-textmeshpro-text-from-ui-via-script.462250/
-    [SerializeField] TextMeshProUGUI gameTimer;
+    public TextMeshProUGUI gameTimer;
     public float timer;
     public string timerText;
     private bool timerStarted;

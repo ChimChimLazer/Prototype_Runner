@@ -10,14 +10,14 @@ public class enemyCombat : MonoBehaviour
     public float rateOfFire;
 
     [Header("References")]
-    [SerializeField] Transform orientation;
-    [SerializeField] Transform body;
+    public Transform orientation;
+    public Transform body;
 
-    [SerializeField] GameObject gun;
-    [SerializeField] Transform muzzle;
-    [SerializeField] GameObject bulletPrefab;
+    public GameObject gun;
+    public Transform muzzle;
+    public GameObject bulletPrefab;
 
-    [SerializeField] GameObject target;
+    public GameObject target;
 
     private enum enemyState {
         idle,

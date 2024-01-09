@@ -17,6 +17,11 @@ public class sceneLoader : MonoBehaviour
     {
         currentScene = getCurrentSceneNum(SceneManager.GetActiveScene().name);
         levelFinished = false;
+
+        if (Highscores.highscores.Length != scenes.Length)
+        {
+            Highscores.createHighscores(scenes.Length);
+        }
     }
 
     int getCurrentSceneNum(string sceneName)
