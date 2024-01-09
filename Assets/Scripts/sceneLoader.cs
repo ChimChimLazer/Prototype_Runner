@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SearchService;
@@ -14,12 +13,33 @@ public class sceneLoader : MonoBehaviour
     public int currentScene;
     private bool levelFinished;
 
+    public float[] highscores;
+
     void Start()
     {
         currentScene = getCurrentSceneNum(SceneManager.GetActiveScene().name);
         levelFinished = false;
+        loadHighscore();
+    }
 
-        Highscores.createHighscores(scenes.Length);
+    void loadHighscore()
+    {
+        highscoreData data = SaveSystem.loadHighscore();
+        if (data != null )
+        {
+            highscores = new float[data.highscores.Length];
+            data.highscores = highscores;
+        }
+        else
+        {
+            highscores = new float[scenes.Length];
+            saveHighscore();
+        }
+    }
+
+    void saveHighscore()
+    {
+        SaveSystem.saveHighscore(this);
     }
 
     int getCurrentSceneNum(string sceneName)
@@ -65,10 +85,9 @@ public class sceneLoader : MonoBehaviour
                 GUI.stopTimer();
                 levelFinished = true;
 
-                if (Highscores.highscores[currentScene] > GUI.timer || Highscores.highscores[currentScene] == 0)
+                if (GUI.timer < highscores[currentScene] || highscores[currentScene] == 0)
                 {
-                    Highscores.highscores[currentScene] = GUI.timer;
-                    Highscores.highscoresText[currentScene] = GUI.timerText;
+                    highscores[currentScene] = GUI.timer;
                 }
 
                 Cursor.lockState = CursorLockMode.Confined; Cursor.visible = true;
