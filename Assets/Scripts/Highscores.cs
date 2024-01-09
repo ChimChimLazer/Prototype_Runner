@@ -5,9 +5,14 @@ using UnityEngine;
 public static class Highscores
 {
     public static float[] highscores;
+    public static string[] highscoresText;
 
     public static void createHighscores(int length)
     {
-        highscores = new float[length];
+        if(highscores == null)
+        {
+            highscores = new float[length];
+            highscoresText = new string[length];
+        }
     }
 }

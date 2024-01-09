@@ -22,7 +22,7 @@ public class levelFinishUI : MonoBehaviour
         // Update text
         levelNameText.text = SceneManager.GetActiveScene().name;
         timeText.text = ("Time : " + GUI.timerText);
-        highscoreText.text = ("Highscore : " + GUI.highscoreText);
+        highscoreText.text = ("Highscore : " + Highscores.highscoresText[loader.currentScene]);
 
         Time.timeScale = 0;
     }

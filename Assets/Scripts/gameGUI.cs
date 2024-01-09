@@ -12,13 +12,9 @@ public class gameGUI : MonoBehaviour
     public string timerText;
     private bool timerStarted;
 
-    public float highscore;
-    public string highscoreText;
-
     void Start()
     {
         timer = 0;
-        highscore = -1; // Temporary
         timerStarted = false;
     }
 
@@ -40,11 +36,6 @@ public class gameGUI : MonoBehaviour
     public void stopTimer()
     {
         timerStarted = false;
-        if (highscore > timer || highscore == -1f)
-        {
-            highscore = timer;
-            highscoreText = convertTimeToText(highscore);
-        }
     }
 
     private string convertTimeToText(float time)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SearchService;
@@ -10,7 +11,7 @@ public class sceneLoader : MonoBehaviour
     public GameObject levelFinishMenuPrefab;
     public gameGUI GUI;
 
-    private int currentScene;
+    public int currentScene;
     private bool levelFinished;
 
     void Start()
@@ -18,10 +19,7 @@ public class sceneLoader : MonoBehaviour
         currentScene = getCurrentSceneNum(SceneManager.GetActiveScene().name);
         levelFinished = false;
 
-        if (Highscores.highscores.Length != scenes.Length)
-        {
-            Highscores.createHighscores(scenes.Length);
-        }
+        Highscores.createHighscores(scenes.Length);
     }
 
     int getCurrentSceneNum(string sceneName)
@@ -66,6 +64,13 @@ public class sceneLoader : MonoBehaviour
             {
                 GUI.stopTimer();
                 levelFinished = true;
+
+                if (Highscores.highscores[currentScene] > GUI.timer || Highscores.highscores[currentScene] == 0)
+                {
+                    Highscores.highscores[currentScene] = GUI.timer;
+                    Highscores.highscoresText[currentScene] = GUI.timerText;
+                }
+
                 Cursor.lockState = CursorLockMode.Confined; Cursor.visible = true;
                 GameObject levelFinishMenu = Instantiate(levelFinishMenuPrefab);
                 levelFinishUI levelFinish = levelFinishMenu.GetComponent<levelFinishUI>();
