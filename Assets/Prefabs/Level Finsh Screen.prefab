@@ -387,6 +387,7 @@ MonoBehaviour:
   timeText: {fileID: 380305921189379675}
   highscoreText: {fileID: 4777817608228591851}
   levelNameText: {fileID: 6479690948176324380}
+  nextLevelButtonObject: {fileID: 5835054147727325524}
 --- !u!1 &2882296304220504555
 GameObject:
   m_ObjectHideFlags: 0

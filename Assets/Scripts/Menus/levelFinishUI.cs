@@ -13,6 +13,8 @@ public class levelFinishUI : MonoBehaviour
     public TextMeshProUGUI highscoreText;
     public TextMeshProUGUI levelNameText;
 
+    public GameObject nextLevelButtonObject;
+
     private gameGUI GUI;
 
     void Start()
@@ -23,6 +25,11 @@ public class levelFinishUI : MonoBehaviour
         levelNameText.text = SceneManager.GetActiveScene().name;
         timeText.text = ("Time : " + GUI.timerText);
         highscoreText.text = ("Highscore : " + GUI.convertTimeToText(loader.highscores[loader.currentScene]));
+
+        if (loader.currentScene == loader.scenes.Length - 1)
+        {
+            nextLevelButtonObject.SetActive(false);
+        }
 
         Time.timeScale = 0;
     }
