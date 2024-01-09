@@ -23,4 +23,13 @@ public class userSettings
 
         FOV = settings.FOV;
     }
+
+    public userSettings(float sensX, float sensY, bool invertX, bool invertY, int fOV)
+    {
+        SensX = sensX;
+        SensY = sensY;
+        InvertX = invertX;
+        InvertY = invertY;
+        FOV = fOV;
+    }
 }

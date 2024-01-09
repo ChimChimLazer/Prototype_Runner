@@ -51,6 +51,18 @@ public static class SaveSystem
         stream.Close();
     }
 
+    public static void createDefaultSetting()
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/userSettings.txt";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        userSettings data = new userSettings(1.5f, 1.5f, false, false, 60);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
+
     public static userSettings loadUserSettings()
     {
         string path = Application.persistentDataPath + "/userSettings.txt";
