@@ -13,10 +13,13 @@ public class SettingsMenu : MonoBehaviour
 {
     public GameObject mainMeu;
 
-    private float SensX;
-    private float SensY;
+    public float SensX;
+    public float SensY;
 
-    private int FOV;
+    public bool invertX;
+    public bool invertY;
+
+    public int FOV;
 
 
     // X Sensitivity 
@@ -47,6 +50,23 @@ public class SettingsMenu : MonoBehaviour
 
         FOVSlider = FOVObject.GetComponentInChildren<Slider>();
         FOVTextBox = FOVObject.GetComponentInChildren<TextMeshProUGUI>();
+
+        loadSettings();
+    }
+
+    void loadSettings()
+    {
+        userSettings data = SaveSystem.loadUserSettings();
+        if (data != null)
+        {
+            SensXSlider.value = data.SensX;
+            SensYSlider.value = data.SensY;
+
+            InvertXToggle.isOn = data.InvertX;
+            InvertYToggle.isOn = data.InvertY;
+
+            FOVSlider.value = data.FOV;
+        }
     }
 
     public void updateSenx()
@@ -69,7 +89,10 @@ public class SettingsMenu : MonoBehaviour
 
     public void applySettings()
     {
-        Debug.Log(FOV);
+        invertX = InvertXToggle.isOn;
+        invertY = InvertYToggle.isOn;
+
+        SaveSystem.saveUserSettings(this);
     }
 
     public void mainMenu()
