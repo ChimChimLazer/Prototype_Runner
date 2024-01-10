@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class cameraMovement : MonoBehaviour
 {
-    public float sensitivityX;
-    public float sensitivityY;
+    public float sensitivityX; // players X sensitivity
+    public float sensitivityY;// players Y sensitivity
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +23,15 @@ public class cameraMovement : MonoBehaviour
     void Update()
     {
 
+        // Gets players mouseX and Y inputs
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
 
+        // move players camera
         transform.eulerAngles += new Vector3(-mouseY * sensitivityY, mouseX * sensitivityX, 0);
     }
 
+    // loads the players settings
     void loadSettings()
     {
         userSettings data = SaveSystem.loadUserSettings();

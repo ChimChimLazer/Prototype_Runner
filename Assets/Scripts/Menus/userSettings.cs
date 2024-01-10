@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This class will store the users setting witch will be stored as a file
+// Makes the class Serializable
 [System.Serializable]
 public class userSettings
 {
@@ -13,6 +15,7 @@ public class userSettings
 
     public int FOV;
 
+    // create using setting function
     public userSettings (SettingsMenu settings)
     {
         SensX = settings.SensX;
@@ -24,6 +27,7 @@ public class userSettings
         FOV = settings.FOV;
     }
 
+    // create using individual variables
     public userSettings(float sensX, float sensY, bool invertX, bool invertY, int fOV)
     {
         SensX = sensX;

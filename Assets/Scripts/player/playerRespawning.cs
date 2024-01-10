@@ -4,43 +4,54 @@ using UnityEngine;
 
 public class playerRespawning : MonoBehaviour
 {
-    public GameObject player;
-    public GameObject healthBar;
-    public GameObject playerCam;
+    public GameObject player; // the players gameobject.
+    public GameObject healthBar; // Players health bar.
+    public GameObject playerCam; // The Players camera.
 
-    public Vector3 spawnPoint;
-    public Quaternion spawnRotation;
+    public Vector3 spawnPoint; // Spawn Point of the player.
+    public Quaternion spawnRotation; // Spawn Rotation of the players.
 
-    public bool alive;
-    private playerCombat playerCombatScript;
+    public bool alive; // bool that displays wether the player is in an alive of dead state.
+    private playerCombat playerCombatScript; // players playerCombatScript.
 
+    // Called on the first frame.
     private void Start()
     {
+        // Gets spawnpoint and spawn rotation.
         spawnPoint = player.transform.position;
         spawnRotation = Quaternion.Euler(0, 0, 0);
 
+        // Gets the players combat script.
         playerCombatScript = player.GetComponent<playerCombat>();
+
+        // Initalise alive variable.
         alive = true;
     }
 
+    // Called on every frame.
     private void Update()
     {
-        if (!alive && Input.GetKeyDown(KeyCode.Space))
+        // Respawns the player when they click any key when they are dead
+        if (!alive && Input.anyKeyDown)
         {
             respawn();
         }
     }
 
+    // Respawns the player
     public void respawn()
     {
-        alive = true;
+        alive = true; // Set alive to true
+
+        // Activate healthbar and player
         healthBar.SetActive(true);
         player.SetActive(true);
-        player.transform.position = spawnPoint;
-        playerCombatScript.maxHeal();
 
-        // https://forum.unity.com/threads/remove-all-force-innertia-from-a-rigidbody.25026/
-        // http://unity3d.com/support/documentation/ScriptReference/Rigidbody-velocity.html
+        // Moves player to spawn point
+        player.transform.position = spawnPoint;
+
+        // Heals player to full health
+        playerCombatScript.maxHeal();
 
         // Sets players velocity to 0 when respawning
         Rigidbody playerRb = player.GetComponent<Rigidbody>();
@@ -48,6 +59,7 @@ public class playerRespawning : MonoBehaviour
         playerRb.velocity = Vector3.zero;
         playerRb.angularVelocity = Vector3.zero;
 
+        // Moves player camera to the spawn roatation
         playerCam.transform.rotation = spawnRotation;
     }
 

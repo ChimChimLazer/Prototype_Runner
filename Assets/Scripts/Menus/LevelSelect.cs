@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class LevelSelect : MonoBehaviour
 {
-    public GameObject mainMenu;
+    public GameObject mainMenu; // main menu object
+
+    // opens main menu when back button is pressed
     public void BackButton()
     {
         mainMenu.SetActive(true);
