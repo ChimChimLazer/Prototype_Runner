@@ -100,7 +100,8 @@ public class playerMovement : MonoBehaviour
         moveSpeed = walkSpeed;
         wallRunCoolDown = wallRunCoolDownTime;
         slideCooldown = slideCooldownTime;
-        playerFOV = FOV;
+
+        loadSettings();
         jumpBufferTimer = 0;
         Time.timeScale = 1;
 
@@ -143,6 +144,15 @@ public class playerMovement : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+    }
+
+    void loadSettings()
+    {
+        userSettings data = SaveSystem.loadUserSettings();
+
+        FOV = data.FOV;
+        boostFOV += data.FOV;
+        playerFOV = FOV;
     }
 
     void Move()

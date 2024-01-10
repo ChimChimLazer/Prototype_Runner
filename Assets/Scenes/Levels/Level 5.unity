@@ -715,6 +715,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Game GUI
       objectReference: {fileID: 0}
+    - target: {fileID: 1971575536468903388, guid: d6994c584c7883745b829a33384e7ad6, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1971575536468903388, guid: d6994c584c7883745b829a33384e7ad6, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2861437252062644089, guid: d6994c584c7883745b829a33384e7ad6, type: 3}
       propertyPath: player
       value: 
