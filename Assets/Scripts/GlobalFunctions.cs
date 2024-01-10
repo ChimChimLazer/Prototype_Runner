@@ -1,0 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public static class GlobalFunctions
+{
+    public static string convertTimeToText(float time)
+    {
+        int milliseconds = Mathf.RoundToInt((time % 1) * 1000);
+        if (milliseconds > 999)
+        {
+            milliseconds = 0;
+        }
+        int seconds = Mathf.RoundToInt((time - milliseconds / 1000) % 60);
+        if (seconds > 59)
+        {
+            seconds = 0;
+        }
+        int minutes = Mathf.RoundToInt((time - milliseconds / 1000 - seconds) / 60);
+
+        // https://learn.microsoft.com/en-us/dotnet/standard/base-types/how-to-pad-a-number-with-leading-zeros?redirectedfrom=MSDN
+        return (minutes + ":" + seconds.ToString("D2") + ":" + milliseconds.ToString("D3"));
+    }
+}
