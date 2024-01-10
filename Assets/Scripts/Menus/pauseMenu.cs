@@ -24,6 +24,8 @@ public class pauseMenu : MonoBehaviour
     public void resume()
     {
         Time.timeScale = 1;
+        Cursor.lockState= CursorLockMode.Locked;
+        Cursor.visible = false;
         Destroy(gameObject);
     }
 

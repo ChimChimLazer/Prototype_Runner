@@ -232,7 +232,10 @@ MonoBehaviour:
   - Level 4
   - Level 5
   levelFinishMenuPrefab: {fileID: 2490247042994368370, guid: e0dc76f5dbfd44b4aa53288ad12b6dc2, type: 3}
+  pauseMenuPrefab: {fileID: 4660522804160957829, guid: 61d3c27ce43c8ef449bd9c781ff0863a, type: 3}
   GUI: {fileID: 0}
+  currentScene: 0
+  highscores: []
 --- !u!1 &5785798456393618865
 GameObject:
   m_ObjectHideFlags: 0
