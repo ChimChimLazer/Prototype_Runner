@@ -20,7 +20,6 @@ public class LevelElement : MonoBehaviour
         highscoreData data = SaveSystem.loadHighscore();
         if (data != null)
         {
-            Debug.Log(levelNumber);
             float highscoreNum = data.highscores[levelNumber];
             Highscore.text = convertTimeToText(highscoreNum);
         }
