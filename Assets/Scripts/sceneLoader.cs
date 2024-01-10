@@ -8,6 +8,7 @@ public class sceneLoader : MonoBehaviour
 {
     public string[] scenes;
     public GameObject levelFinishMenuPrefab;
+    public GameObject pauseMenuPrefab;
     public gameGUI GUI;
 
     public int currentScene;
@@ -15,11 +16,21 @@ public class sceneLoader : MonoBehaviour
 
     public float[] highscores;
 
+    private GameObject currentPauseMenu;
+
     void Start()
     {
         currentScene = getCurrentSceneNum(SceneManager.GetActiveScene().name);
         levelFinished = false;
         loadHighscore();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && currentPauseMenu == null)
+        {
+            currentPauseMenu = Instantiate(pauseMenuPrefab);
+        }
     }
 
     void loadHighscore()
