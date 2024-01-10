@@ -6,18 +6,21 @@ using static System.Net.WebRequestMethods;
 
 public class gameGUI : MonoBehaviour
 {
-    //https://forum.unity.com/threads/changing-textmeshpro-text-from-ui-via-script.462250/
-    public TextMeshProUGUI gameTimer;
-    public float timer;
-    public string timerText;
-    private bool timerStarted;
+    public TextMeshProUGUI gameTimer; // Text box that displays the game timer.
+    public float timer; // Game timer, this will count up when the user is playing the level.
+    public string timerText; // String that stores a formatted version of the timer variable.
+    private bool timerStarted; // Bool that checks if the timer should be started.
 
+    // Called on the  first frame 
     void Start()
     {
-        timer = 0;
+        // Initilise timer and timerStarted variables
+        timer = 0; 
         timerStarted = false;
     }
 
+    // Called on every frame
+    // Increases the timer by time.delta and updates the timer text box with the formatted version of the new time
     void Update()
     {
         if (timerStarted)
@@ -28,11 +31,13 @@ public class gameGUI : MonoBehaviour
         }
     }
 
+    // Starts timer (called by the scene loader script)
     public void startTimer()
     {
         timerStarted = true;
     }
 
+    //Stops timer (called by the scene loader script)
     public void stopTimer()
     {
         timerStarted = false;
