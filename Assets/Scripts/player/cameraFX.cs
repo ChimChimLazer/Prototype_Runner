@@ -18,7 +18,7 @@ public class cameraFX : MonoBehaviour
     {
         wallRunTiltSpeed = wallRunTiltSpeed / 100;
         currentFOV = playerMovement.playerFOV;
-        gameCamera.fieldOfView = currentFOV;
+        loadSettings();
     }
     void Update()
     {
@@ -40,5 +40,13 @@ public class cameraFX : MonoBehaviour
 
             gameCamera.fieldOfView = currentFOV;
         }
+    }
+
+    void loadSettings()
+    {
+        userSettings data = SaveSystem.loadUserSettings();
+        
+        gameCamera.fieldOfView = data.FOV;
+        
     }
 }
