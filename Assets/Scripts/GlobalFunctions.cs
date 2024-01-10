@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This class stores functions that will be used in multiple different scripts.
 public static class GlobalFunctions
 {
+    // Converts time from a floating number of seconds to a formatted string that displays minutes, seconds and milliseconds.
+    // This text will be fromatted as show in the line below (M = minutes, S = seconds, m = milliseconds
+    // M:SS:mmm
     public static string convertTimeToText(float time)
     {
         int milliseconds = Mathf.RoundToInt((time % 1) * 1000);
