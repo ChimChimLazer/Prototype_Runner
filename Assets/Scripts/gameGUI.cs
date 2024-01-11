@@ -31,7 +31,7 @@ public class gameGUI : MonoBehaviour
         }
     }
 
-    // Starts timer (called by the scene loader script)
+    // Starts timer (called by the playerMovement script)
     public void startTimer()
     {
         timerStarted = true;
