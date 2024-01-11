@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This script manages the players camera movement
+// https://medium.com/@mikeyoung_97230/creating-a-simple-camera-controller-in-unity3d-using-c-ec1a79584687
+// was used when creating this script
 public class cameraMovement : MonoBehaviour
 {
     public float sensitivityX; // players X sensitivity
@@ -19,7 +22,7 @@ public class cameraMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    // https://medium.com/@mikeyoung_97230/creating-a-simple-camera-controller-in-unity3d-using-c-ec1a79584687
+    
     void Update()
     {
 
