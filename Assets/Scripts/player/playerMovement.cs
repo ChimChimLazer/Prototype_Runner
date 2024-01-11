@@ -157,7 +157,7 @@ public class playerMovement : MonoBehaviour
 
         groundCheck(); // Updates groundCheck
         jump(); // Allows the player to jump
-        jumpBufferingAndCoyoteTime(); // Hangles junp buffering and coyote time
+        jumpBufferingAndCoyoteTime(); // Handles junp buffering and coyote time
         moveStateHandler(); // Manages the players movement state
     }
 
