@@ -72,12 +72,15 @@ public class SettingsMenu : MonoBehaviour
         if (data != null)
         {
             SensXSlider.value = data.SensX;
+            updateSenx();
             SensYSlider.value = data.SensY;
+            updateSenY();
 
             InvertXToggle.isOn = data.InvertX;
             InvertYToggle.isOn = data.InvertY;
 
             FOVSlider.value = data.FOV;
+            updateFOV();
         }
     }
 
