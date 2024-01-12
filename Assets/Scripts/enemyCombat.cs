@@ -82,7 +82,7 @@ public class enemyCombat : MonoBehaviour
         // handles player detectin
         playerDetection();
 
-        // sets the players state
+        // sets the enemys state
         setState();
 
         switch (state)
