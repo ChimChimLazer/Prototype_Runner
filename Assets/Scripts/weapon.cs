@@ -72,6 +72,7 @@ public class weapon : MonoBehaviour
                 }
             }
         }
+        
     }
 
     // called when player picks up the weapon

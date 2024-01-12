@@ -98,6 +98,11 @@ public class playerCombat : MonoBehaviour
                 // if the raycast is a weapon
                 if (hit.collider.tag == "Weapon")
                 {
+                    // Drop current weapon if one is already held
+                    if (CurrentWeapon != null)
+                    {
+                        CurrentWeapon.DropWeapon();
+                    }
                     // gets the weapon script from the weapon
                     CurrentWeapon = hit.collider.gameObject.GetComponent<weapon>();
 
