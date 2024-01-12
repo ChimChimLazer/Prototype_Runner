@@ -1,12 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // This function controlls the functionality of the start screen
 public class startScreen : MonoBehaviour
 {
-    public GameObject mainMenu; // main menu gameobject
-
     // called on the first frame
     private void Start()
     {
@@ -22,8 +21,7 @@ public class startScreen : MonoBehaviour
         // if the user presses any key open the main menu
         if (Input.anyKeyDown) 
         {
-            mainMenu.SetActive(true);
-            gameObject.SetActive(false);
+            SceneManager.LoadScene("Main Menu");
         }
     }
 }
